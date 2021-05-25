@@ -39,20 +39,14 @@ public:
 //------------------------------------------------- Surcharge d'opérateurs
     
 //----------------------------------------------------- Constructeurs
-LectureFichier();
 
-
-LectureFichier ( const LectureFichier & unTypeMesure );
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
-void lectureAttribut(ifstream &input,vector<Attribut> &);
-void lectureMesure(ifstream &input, vector<Mesure> & listMesure);
-void lectureCapteur(ifstream &input, vector<Capteur>& listSensor,vector<Mesure> & listMesure);
-void lectureCleaner(ifstream &input, vector<Cleaner>& listCleaner);
-void lectureFournisseur(ifstream &input, vector<Fournisseur>& listProvider,vector<Cleaner>& listCleaner);
-void lectureUtilisateurPrive(ifstream &input, vector<UtilisateurPrive>& listUP,vector<Capteur>& listSensor);
+static void lectureAttribut(ifstream &input,vector<Attribut> &);
+static void lectureMesure(ifstream &input, vector<Mesure> & listMesure, vector<Attribut> listAttribut);
+static void lectureCapteur(ifstream &input, vector<Capteur>& listSensor,vector<Mesure> & listMesure);
+static void lectureCleaner(ifstream &input, vector<Cleaner>& listCleaner);
+static void lectureFournisseur(ifstream &input, vector<Fournisseur>& listProvider,vector<Cleaner>& listCleaner);
+static void lectureUtilisateurPrive(ifstream &input, vector<UtilisateurPrive>& listUP,vector<Capteur>& listSensor);
+static tm gettimem(string time);
 
 //----------------------------------------------------- Destructeur
 ~LectureFichier();

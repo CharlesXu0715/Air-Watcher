@@ -1,73 +1,79 @@
 /*************************************************************************
-                           Analyse  -  description
+                           Attribut  -  description
                              -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
+    copyright            : (C) XU Yuantao
 *************************************************************************/
 
-//---------- Réalisation de la classe <Analyse> (fichier Analyse.cpp) ------------
+//---------- Réalisation de la classe <Attribut> (fichier Attribut.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include système
-#include <stdio.h>
-#include <iostream>
-#include <fstream>
-#include<cstring>
 using namespace std;
-
-
+#include <iostream>
 
 //------------------------------------------------------ Include personnel
 #include "Attribut.h"
-
 
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type Analyse::Méthode ( liste des paramètres )
+// type Attribut::Méthode ( liste des paramètres )
 // Algorithme :
 //
 //{
 //} //----- Fin de Méthode
-string Attribut::getAttributID(){
-	return attributID;
-}
 
-//------------------------------------------------- Surcharge d'opérateurs
 
 //-------------------------------------------- Constructeurs - destructeur
-Attribut::Attribut ( const Attribut & unAttribut )
+Attribut::Attribut ( string unit, string description, string id )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de copie de <Analyse>" << endl;
+    cout << "Appel au constructeur de copie de <Attribut>" << endl;
 #endif
 
-	attributID=unAttribut.attributID;
-   unit=unAttribut.unit;
-   description=unAttribut.description;
-   
-} //----- Fin de Analyse (constructeur de copie)
+this->unit=unit;
+this->description=description;
+this->attributeID=id;
+} //----- Fin de Attribut (constructeur de copie)
 
 
-Attribut::Attribut (string a,string b, string c)
+Attribut::Attribut ( )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de <Analyse>" << endl;
+    cout << "Appel au constructeur de <Attribut>" << endl;
 #endif
+this->unit="";
+this->description="";
+this->attributeID="";
+} //----- Fin de Attribut
 
-   attributID=a;
-   unit=b;
-   description=c;
-    
-} //----- Fin de Analyse
+string Attribut::getUnit(){
+    return this->unit;
+}
+
+string Attribut::getID()
+{
+    return this->attributeID;
+}
+
+void Attribut::setUnit(string unit){
+    this->unit=unit;
+}
+
+string Attribut::getDescription(){
+    return this->description;
+}
+
+void Attribut::setDescription(string description){
+    this->description=description;
+}
 
 
 Attribut::~Attribut ( )
@@ -75,13 +81,11 @@ Attribut::~Attribut ( )
 //
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <Analyse>" << endl;
+    cout << "Appel au destructeur de <Attribut>" << endl;
 #endif
-} //----- Fin de ~Analyse
+} //----- Fin de ~Attribut
 
 
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
-
-

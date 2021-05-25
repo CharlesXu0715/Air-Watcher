@@ -65,7 +65,7 @@ void LectureFichier::lectureAttribut(ifstream &input,vector<Attribut> & listAttr
 	}
 }
 
-void LectureFichier::lectureMesure(ifstream &input, vector<Mesure> & listMesure)
+void LectureFichier::lectureMesure(ifstream &input, vector<Mesure> & listMesure,vector<Attribut> listAttribut)
 {
 	int i=0;
 	string eol;
@@ -91,8 +91,17 @@ void LectureFichier::lectureMesure(ifstream &input, vector<Mesure> & listMesure)
 			break;
 		}
 		//cout<<Timestamp<<" "<<SensorID<< " "<<AttributeID<<" "<<value<<endl;
-		Mesure m(Timestamp,SensorID,AttributeID,Value);
-		listMesure.push_back(m);
+		tm timestamp=gettimem(Timestamp);
+		for(Attribut mt : listAttribut)
+            {
+                if (mt.getID().compare(AttributeID)==0){
+                    Mesure m(timestamp, value, mt, SensorID);
+                    listMesure.push_back(m);
+                    break;
+            }
+          }
+		/*Mesure m(timestamp,value,AttributeID,SensorID);
+		listMesure.push_back(m);*/
 	}
 }
 
@@ -159,7 +168,11 @@ void LectureFichier::lectureCleaner(ifstream &input, vector<Cleaner>& listCleane
 		{
 			break;
 		}
-		Cleaner c(CleanerID,Latitude,Longitude,TimeStart,TimeStop);
+		tm* dD = new tm();
+		*dD=gettimem(TimeStart);
+		tm* dF = new tm();
+		*dF=gettimem(TimeStop);
+		Cleaner c(CleanerID,Latitude,Longitude,dD,dF);
 		listCleaner.push_back(c);
 	}
 }
@@ -182,17 +195,19 @@ void LectureFichier::lectureFournisseur(ifstream &input, vector<Fournisseur>& li
 		{
 			break;
 		}
-		Fournisseur p(ProviderID);
+		
 		
 		vector<Cleaner>::iterator it;
 		for (it=listCleaner.begin();it!=listCleaner.end();it++)
 			{
-				if (CleanerID==it->getCapteurID())
+				if (CleanerID==it->getID())
 				{
-					p.getListeCleaner().push_back(*it);
+					Fournisseur p(ProviderID,*it);
+					listProvider.push_back(p);
+					break;
 				}
 			}
-		listProvider.push_back(p);
+		//listProvider.push_back(p);
 	}
 }
 
@@ -227,40 +242,46 @@ void LectureFichier::lectureUtilisateurPrive(ifstream &input, vector<Utilisateur
 	}
 }
 
+tm LectureFichier::gettimem(string time){//methode qui renvoie un mt a partir d'un string
+    int count=0;
+
+    //les chaines de caractères contenant les dates ont toutes le même format donc on recupere des sous chaines
+    string syear=time.substr(0,4);
+
+    string smonth=time.substr(5,2);
+
+    string sday=time.substr(8,2);
+
+    string shour=time.substr(11,2);
+
+    string smin=time.substr(14,2);
+
+    string ssec=time.substr(17,2);
+
+
+
+    int year=stoi(syear);
+    int month=stoi(smonth);
+    int day=stoi(sday);
+    int hour=stoi(shour);
+    int min=stoi(smin);
+    int sec=stoi(ssec);
+
+    tm timestamp;
+    timestamp.tm_year=year-1900; //l'annee dans les tm correspond aux nombres d'annes depuis 1900
+    timestamp.tm_mon=month-1; //les mois correspondent au nombre de mois depuis janvier
+    timestamp.tm_hour=hour;
+    timestamp.tm_mday=day;
+    timestamp.tm_sec=sec;
+    timestamp.tm_min=min;
+
+    return timestamp;
+}
+
 //------------------------------------------------- Surcharge d'opérateurs
 
 //-------------------------------------------- Constructeurs - destructeur
-LectureFichier::LectureFichier ( const LectureFichier & uneAnalyse )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <Analyse>" << endl;
-#endif
-} //----- Fin de Analyse (constructeur de copie)
 
-
-LectureFichier::LectureFichier ()
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de <Analyse>" << endl;
-#endif
-
-   
-    
-} //----- Fin de Analyse
-
-
-LectureFichier::~LectureFichier ( )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au destructeur de <Analyse>" << endl;
-#endif
-} //----- Fin de ~Analyse
 
 
 //------------------------------------------------------------------ PRIVE

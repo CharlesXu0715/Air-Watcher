@@ -50,6 +50,7 @@ AnalyseGouverneur ( const AnalyseGouverneur & unTypeMesure );
 
 //----------------------------------------------------- Méthodes publiques
  
+void sensorsSimilairs(string lat, string lon, float rayonEnKm, int dureeEnMois, float precision);
 
 //------------------------------------------------------------------ PRIVE
 

@@ -33,70 +33,58 @@ using namespace std;
 //
 //{
 //} //----- Fin de Méthode
-
-string & Cleaner::getCapteurID(){
-	return capteurID;
+string Cleaner:: getID() {
+	return cleanerID;
 }
-
-string & Cleaner::getLatitude(){
+string Cleaner:: getLatitude() {
 	return latitude;
 }
-
-string & Cleaner::getLongitude(){
+string Cleaner::getLongitude() {
 	return longitude;
 }
-
-string & Cleaner::getDateDebut(){
+struct tm* Cleaner::getDateDebut() {
 	return dateDebut;
 }
-
-string & Cleaner::getDateFin(){
+struct tm* Cleaner::getDateFin() {
 	return dateFin;
+}
+
+void Cleaner::setID(string uncleanerID) {
+	cleanerID = uncleanerID;
+}
+void Cleaner::setLatitute(string uneLatitute) {
+	latitude = uneLatitute;
+}
+void Cleaner::setLongitude(string uneLongitude) {
+	longitude = uneLongitude;
+}
+void Cleaner::setDateDebut(tm* uneDateDebut) {
+	dateDebut = uneDateDebut;
+}
+void Cleaner::setDateFin(tm* uneDateFin) {
+	dateDebut = uneDateFin;
 }
 //------------------------------------------------- Surcharge d'opérateurs
 
 //-------------------------------------------- Constructeurs - destructeur
-Cleaner::Cleaner ( const Cleaner & unCleaner )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <Analyse>" << endl;
-#endif
-	capteurID=unCleaner.capteurID;
-   latitude=unCleaner.latitude;
-   longitude=unCleaner.longitude;
-   dateDebut=unCleaner.dateDebut;
-   dateFin=unCleaner.dateFin;
+Cleaner::Cleaner() {
+	latitude="";
+	longitude="";
+	cleanerID="";
+	dateFin = 0;
+	dateDebut = 0;
+}//----- Fin de Cleaner
 
-} //----- Fin de Analyse (constructeur de copie)
+Cleaner::Cleaner(string unelatitude, string unelongitude, string uncleanerID, struct tm* unedateDebut, struct tm* unedateFin) {
+	latitude = unelatitude;
+	longitude = unelongitude;
+	cleanerID = uncleanerID;
+	dateFin = unedateFin;
+	dateDebut = unedateDebut;
+}//----- Fin de Cleaner
 
-
-Cleaner::Cleaner (string a,string b,string c,string d, string e)
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de <Analyse>" << endl;
-#endif
-   capteurID=a;
-   latitude=b;
-   longitude=c;
-   dateDebut=d;
-   dateFin=e;
-   
-    
-} //----- Fin de Analyse
-
-
-Cleaner::~Cleaner ( )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au destructeur de <Analyse>" << endl;
-#endif
-} //----- Fin de ~Analyse
+Cleaner::~Cleaner() {
+}//----- Fin de~Cleaner
 
 
 //------------------------------------------------------------------ PRIVE

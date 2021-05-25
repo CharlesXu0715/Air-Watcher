@@ -33,14 +33,32 @@ using namespace std;
 //
 //{
 //} //----- Fin de Méthode
-string & Fournisseur::getFournisseurID(){
+string Fournisseur::getID(){
 	return fournisseurID;
 }
 
-vector<Cleaner> & Fournisseur::getListeCleaner(){
+vector<Cleaner> Fournisseur::getListeCleaner(){
 	return  mesCleaners;
 }
 
+void Fournisseur::ajouterCleaner(Cleaner unCleaner) {
+	mesCleaners.push_back(unCleaner);
+}
+
+void Fournisseur::supprimerCleaner(string cleanerId, struct tm* dateFin){
+	vector<Cleaner>::iterator it;
+	for (it=mesCleaners.begin();it!=mesCleaners.end();it++)
+	{
+		if (cleanerId==it->getID())
+		{
+			it->setDateFin(dateFin);
+		}
+	}
+}
+
+void Fournisseur::setID(string unproviderID) {
+	fournisseurID=unproviderID;
+}
 
 //------------------------------------------------- Surcharge d'opérateurs
 
@@ -58,14 +76,15 @@ mesCleaners=unFournisseur.mesCleaners;
 } //----- Fin de Analyse (constructeur de copie)
 
 
-Fournisseur::Fournisseur (string a)
+Fournisseur::Fournisseur (string providerID, Cleaner unCleaner)
 // Algorithme :
 //
 {
 #ifdef MAP
     cout << "Appel au constructeur de <Analyse>" << endl;
 #endif
-fournisseurID=a;
+fournisseurID=providerID;
+mesCleaners.push_back(unCleaner);
    
     
 } //----- Fin de Analyse
