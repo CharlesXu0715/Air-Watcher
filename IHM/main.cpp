@@ -1,15 +1,15 @@
 
 //Import de librairies
 #include <string>
-#include "Capteur.h"
-#include "Mesure.h"
-#include "Fournisseur.h"
-#include "Cleaner.h"
-#include "UtilisateurPrive.h"
-#include "Analyse.h"
-#include "AnalyseGouverneur.h"
-#include "LectureFichier.h"
-#include "Gouverneur.h"
+#include "../Données/Capteur.h"
+#include "../Données/Mesure.h"
+#include "../Données/Fournisseur.h"
+#include "../Données/Cleaner.h"
+#include "../Données/UtilisateurPrive.h"
+#include "../Services/Analyse.h"
+#include "../Services/AnalyseGouverneur.h"
+#include "../Données/LectureFichier.h"
+#include "../Données/Gouverneur.h"
 #include <iostream>
 #include<string>
 #include<string.h>
@@ -49,22 +49,22 @@ int main(int argc,char* argv[]){
 	//Phase de lecture et de stockage de toutes les données contenues dans les fichiers .csv		
 	
 	LectureFichier lec;
-	ifstream fic("attributes.csv");
+	ifstream fic("../FichiersCSV/attributes.csv");
 	lec.lectureAttribut(fic,ana->getListeAttribut());
-	ifstream fic2("measurements.csv");
+	ifstream fic2("../FichiersCSV/measurements.csv");
 	lec.lectureMesure(fic2,ana->getListeMesure());
-	ifstream fic3("sensors.csv");
+	ifstream fic3("../FichiersCSV/sensors.csv");
 	lec.lectureCapteur(fic3,ana->getListeCapteur(),ana->getListeMesure());
-	ifstream fic4("cleaners.csv");
+	ifstream fic4("../FichiersCSV/cleaners.csv");
 	lec.lectureCleaner(fic4,ana->getListeCleaner());
-	ifstream fic5("providers.csv");
+	ifstream fic5("../FichiersCSV/providers.csv");
 	lec.lectureFournisseur(fic5,ana->getListeFournisseur(),ana->getListeCleaner());
-	ifstream fic6("users.csv");
+	ifstream fic6("../FichiersCSV/users.csv");
 	lec.lectureUtilisateurPrive(fic6,ana->getListeUtilisateurPrive(),ana->getListeCapteur());
 	Gouverneur* gouvernement= new Gouverneur("10",ana->getListeCapteur(),ana->getListeCleaner());
 	
 	//Variable servant a naviguer dans les switch cases
-	int select = 0;
+	int select = 0;;
 	
 	//Booléens indiquant quel type d'utilisateur est en train d'interragir
 	bool gouv=false;
