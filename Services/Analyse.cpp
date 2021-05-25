@@ -95,11 +95,14 @@ vector<UtilisateurPrive> & Analyse::getListeUtilisateurPrive(){
 }
 
 void Analyse::QualitePointMoment(double longitude, double latitude, int annee, int mois, int jour){
-	double rayon =2;
-	vector<Capteur> listCapt (capteurDansLaZone(longitude,latitude,rayon));
+	double rayon =2.0;
+	cout<<"1"<<endl;
+	vector<Capteur> listCapt=capteurDansLaZone(longitude,latitude,rayon);
+	cout<<"2"<<endl;
 	if(listCapt.empty()==true){
 		cout<<"Aucun Capteur dans la zone reessayer avec d'autres positions"<<endl;
 	}else{
+		cout<<"3"<<endl;
 		CalculeQualiteAir(latitude,longitude,rayon,annee,mois,jour,true);
 	}
 
@@ -108,8 +111,10 @@ void Analyse::QualitePointMoment(double longitude, double latitude, int annee, i
 vector<Capteur>  Analyse::capteurDansLaZone(double longitude, double latitude, double rayon){
 	vector<Capteur> listRep;
 	vector<Capteur>::iterator it;
+	cout<<collectionCapteur.size()<<endl;
 		for (it=collectionCapteur.begin();it!=collectionCapteur.end();it++)
 			{
+				cout<<"it"<<endl;
 				if (sqrt( (latitude-atof((it->getLatitude()).c_str()))*(latitude-atof((it->getLatitude()).c_str())) + (longitude-atof((it->getLongitude()).c_str()))*(longitude-atof((it->getLongitude()).c_str())) ) < rayon && it->getDefaillant()!=true)
 				{
 					listRep.push_back(*it);

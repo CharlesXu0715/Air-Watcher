@@ -34,8 +34,8 @@ void MenuSupprimerCleaner();
 void MenuFinCleaner();
 void MenuQualiteCleaner();
 
-
-
+//Variable servant a naviguer dans les switch cases
+AnalyseGouverneur * ana;
 
 
 
@@ -48,23 +48,30 @@ int main(int argc,char* argv[]){
 	
 	//Variables servant à appeler les fonctions
 	
-	ifstream fic("../FichiersCSV/attributes.csv");
+	ifstream fic("./FichiersCSV/attributes.csv");
 	vector<Attribut> listAttribut=LectureFichier::lectureAttribut(fic);
-	ifstream fic2("../FichiersCSV/measurements.csv");
+	ifstream fic2("./FichiersCSV/measurements.csv");
 	vector<Mesure> listMesure=LectureFichier::lectureMesure(fic2,listAttribut);
-	ifstream fic3("../FichiersCSV/sensors.csv");
+	ifstream fic3("./FichiersCSV/sensors.csv");
 	vector<Capteur> listCapteur=LectureFichier::lectureCapteur(fic3,listMesure);
-	ifstream fic4("../FichiersCSV/cleaners.csv");
+	ifstream fic4("./FichiersCSV/cleaners.csv");
 	vector<Cleaner> listCleaner=LectureFichier::lectureCleaner(fic4);
-	ifstream fic5("../FichiersCSV/providers.csv");
+	ifstream fic5("./FichiersCSV/providers.csv");
 	vector<Fournisseur> listProvider=LectureFichier::lectureFournisseur(fic5,listCleaner);
-	ifstream fic6("../FichiersCSV/users.csv");
+	ifstream fic6("./FichiersCSV/users.csv");
 	vector<UtilisateurPrive> listUP=LectureFichier::lectureUtilisateurPrive(fic6,listCapteur);
 	AnalyseGouverneur * ana = new AnalyseGouverneur(listAttribut,listMesure,listCapteur,listCleaner,listProvider,listUP);
 	Gouverneur* gouvernement= new Gouverneur("10",ana->getListeCapteur(),ana->getListeCleaner());
+	cout<<listAttribut.size()<<endl;
+	cout<<listMesure.size()<<endl;
+	cout<<listCapteur.size()<<endl;
+	cout<<listCleaner.size()<<endl;
+	cout<<listProvider.size()<<endl;
+	cout<<listUP.size()<<endl;
+	
+	cout<<ana->getListeCapteur().size()<<endl;
 	
 	
-	//Variable servant a naviguer dans les switch cases
 	int select = 0;;
 	
 	//Booléens indiquant quel type d'utilisateur est en train d'interragir

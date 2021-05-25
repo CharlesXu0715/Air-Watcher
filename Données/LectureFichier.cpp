@@ -46,7 +46,7 @@ vector<Attribut> LectureFichier::lectureAttribut(ifstream &input)
 	string AttributID;
     string Unit;
     string Description;
-	while (!input.eof())
+	while (input.peek()!=EOF)
 	{
 		i++;
 		AttributID.clear();
@@ -61,7 +61,8 @@ vector<Attribut> LectureFichier::lectureAttribut(ifstream &input)
 		{
 			break;
 		}
-		listAttribut.push_back(Attribut (AttributID,Unit,Description));	
+		Attribut a(Unit,Description,AttributID);
+		listAttribut.push_back(a);
 	}
 	return listAttribut;
 }
@@ -83,6 +84,7 @@ vector<Mesure> LectureFichier::lectureMesure(ifstream &input,vector<Attribut> li
 		AttributeID.clear();
 		Value.clear();
 		getline(input,Timestamp,';');
+		//cout<<Timestamp<<endl;
 		getline(input,SensorID,';');
 		getline(input,AttributeID,';');
 		getline(input,Value,';');
@@ -94,10 +96,13 @@ vector<Mesure> LectureFichier::lectureMesure(ifstream &input,vector<Attribut> li
 		}
 		//cout<<Timestamp<<" "<<SensorID<< " "<<AttributeID<<" "<<value<<endl;
 		tm timestamp=gettimem(Timestamp);
-		for(Attribut mt : listAttribut)
+		//cout<<timestamp.tm_mday<<endl;
+		vector <Attribut>::iterator it;
+		for(it=listAttribut.begin();it!=listAttribut.end();it++)
             {
-                if (mt.getID().compare(AttributeID)==0){
-                    Mesure m(timestamp, value, mt, SensorID);
+                //cout<<it->getID()<<endl;
+                if (it->getID()==AttributeID){
+                    Mesure m(timestamp, value, *it, SensorID);
                     listMesure.push_back(m);
                     break;
             }
@@ -177,7 +182,7 @@ vector<Cleaner> LectureFichier::lectureCleaner(ifstream &input)
 		*dD=gettimem(TimeStart);
 		tm* dF = new tm();
 		*dF=gettimem(TimeStop);
-		Cleaner c(CleanerID,Latitude,Longitude,dD,dF);
+		Cleaner c(Latitude,Longitude,CleanerID,dF,dD);
 		listCleaner.push_back(c);
 	}
 	return listCleaner;
