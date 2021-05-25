@@ -361,12 +361,14 @@ void MenuMoyZoneMoment(){
 	cin>>longitude;
 	cout<<"nous allons déterminer la zone circulaire de recherche, entrez le rayon de la zone"<<endl;
 	cin>>rayon;
-	cout<<"Entrez l'année de recherche"<<endl;
-	cin>>annee;
-	cout<<"Entrez le mois de recherche (en chiffre, par exemple pour mars entrez \"03\")"<<endl;
-	cin>>mois;
 	cout<<"Entrez le jour de recherche"<<endl;
 	cin>>jour;
+	cout<<"Entrez le mois de recherche (en chiffre, par exemple pour mars entrez \"03\")"<<endl;
+	cin>>mois;
+	cout<<"Entrez l'année de recherche"<<endl;
+	cin>>annee;
+	
+	
 	
 	cout<<endl;
 	cout<<endl;
@@ -391,18 +393,18 @@ void MenuMoyZonePeriode(){
 	cin>>longitude;
 	cout<<"nous allons déterminer la zone circulaire de recherche, entrez le rayon de la zone"<<endl;
 	cin>>rayon;
-	cout<<"Entrez l'année de début de recherche"<<endl;
-	cin>>anneeDebut;
-	cout<<"Entrez le mois de début de recherche (en chiffre, par exemple pour mars entrez \"03\")"<<endl;
-	cin>>moisDebut;
 	cout<<"Entrez le jour de début derecherche"<<endl;
 	cin>>jourDebut;
-	cout<<"Entrez l'année de fin de recherche"<<endl;
-	cin>>anneeFin;
-	cout<<"Entrez le mois de fin de recherche (en chiffre, par exemple pour mars entrez \"03\")"<<endl;
-	cin>>moisFin;
+	cout<<"Entrez le mois de début de recherche (en chiffre, par exemple pour mars entrez \"03\")"<<endl;
+	cin>>moisDebut;
+	cout<<"Entrez l'année de début de recherche"<<endl;
+	cin>>anneeDebut;
 	cout<<"Entrez le jour de fin derecherche"<<endl;
 	cin>>jourFin;
+	cout<<"Entrez le mois de fin de recherche (en chiffre, par exemple pour mars entrez \"03\")"<<endl;
+	cin>>moisFin;
+	cout<<"Entrez l'année de fin de recherche"<<endl;
+	cin>>anneeFin;
 	cout<<endl;
 	cout<<endl;
 	//Méthode Moy Zone Periode
@@ -419,12 +421,12 @@ void MenuQualitePointMoment(){
 	cin>>latitude;
 	cout<<"nous allons déterminer le point de recherche, entrez la longitude de ce point"<<endl;
 	cin>>longitude;
-	cout<<"Entrez l'année de recherche"<<endl;
-	cin>>annee;
-	cout<<"Entrez le mois de recherche (en chiffre, par exemple pour mars entrez \"03\")"<<endl;
-	cin>>mois;
 	cout<<"Entrez le jour de recherche"<<endl;
 	cin>>jour;
+	cout<<"Entrez le mois de recherche (en chiffre, par exemple pour mars entrez \"03\")"<<endl;
+	cin>>mois;
+	cout<<"Entrez l'année de recherche"<<endl;
+	cin>>annee;
 
 	cout<<"la qualité de l'air en "<<to_string(latitude)<<" / "+to_string(longitude)<<" le "<<to_string(jour)<<"/"<<to_string(mois)<<"/"<<to_string(annee)<<" est :"<<endl;
 	ana->QualitePointMoment(longitude, latitude, annee, mois, jour);
@@ -504,12 +506,12 @@ void MenuAjouterCleaner(){
 	cin>>latitude;
 	cout<<"Entrez la longitude de votre Air'Cleaner"<<endl;
 	cin>>longitude;
-	cout<<"Entrez l'année de recherche"<<endl;
-	cin>>annee;
-	cout<<"Entrez le mois de recherche (en chiffre, par exemple pour mars entrez \"03\")"<<endl;
-	cin>>mois;
-	cout<<"Entrez le jour de recherche"<<endl;
+	cout<<"Entrez le jour de début de fonctionnement de votre Air'Cleaner"<<endl;
 	cin>>jour;
+	cout<<"Entrez le mois de fonctionnement de votre Air'Cleaner (en chiffre, par exemple pour mars entrez \"03\")"<<endl;
+	cin>>mois;
+	cout<<"Entrez l'année de fonctionnement de votre Air'Cleaner"<<endl;
+	cin>>annee;
 	cout<<endl;
 	cout<<endl;
 	//Methode AjouterCleaner
@@ -533,12 +535,12 @@ void MenuFinCleaner(){
 
 	cout<<"Entrez le nom de votre Air'Cleaner "<<endl;
 	cin>>cleanerID;
-	cout<<"Entrez l'année de fin de fonctionnement du Air'Cleaner"<<endl;
-	cin>>annee;
-	cout<<"Entrez le mois de fin de fonctionnement du Air'Cleaner (en chiffre, par exemple pour mars entrez \"03\")"<<endl;
-	cin>>mois;
 	cout<<"Entrez le jour de fin de fonctionnement du Air'Cleaner"<<endl;
 	cin>>jour;
+	cout<<"Entrez le mois de fin de fonctionnement du Air'Cleaner (en chiffre, par exemple pour mars entrez \"03\")"<<endl;
+	cin>>mois;
+	cout<<"Entrez l'année de fin de fonctionnement du Air'Cleaner"<<endl;
+	cin>>annee;
 	//Methode FinCleaner
 }
 
