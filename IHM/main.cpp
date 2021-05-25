@@ -50,21 +50,20 @@ int main(int argc,char* argv[]){
 	
 	
 	ifstream fic("../FichiersCSV/attributes.csv");
-	
-		cout<<"erreur d'ouverture = "<<fic.fail()<<endl;
-	
-	LectureFichier::lectureAttribut(fic,ana->getListeAttribut());
+	vector<Attribut> listAttribut=LectureFichier::lectureAttribut(fic);
 	ifstream fic2("../FichiersCSV/measurements.csv");
-	LectureFichier::lectureMesure(fic2,ana->getListeMesure(),ana->getListeAttribut());
+	vector<Mesure> listMesure=LectureFichier::lectureMesure(fic2,listAttribut);
 	ifstream fic3("../FichiersCSV/sensors.csv");
-	LectureFichier::lectureCapteur(fic3,ana->getListeCapteur(),ana->getListeMesure());
+	vector<Capteur> listCapteur=LectureFichier::lectureCapteur(fic3,listMesure);
 	ifstream fic4("../FichiersCSV/cleaners.csv");
-	LectureFichier::lectureCleaner(fic4,ana->getListeCleaner());
+	vector<Cleaner> listCleaner=LectureFichier::lectureCleaner(fic4);
 	ifstream fic5("../FichiersCSV/providers.csv");
-	LectureFichier::lectureFournisseur(fic5,ana->getListeFournisseur(),ana->getListeCleaner());
+	vector<Fournisseur> listProvider=LectureFichier::lectureFournisseur(fic5,listCleaner);
 	ifstream fic6("../FichiersCSV/users.csv");
-	LectureFichier::lectureUtilisateurPrive(fic6,ana->getListeUtilisateurPrive(),ana->getListeCapteur());
+	vector<UtilisateurPrive> listUP=LectureFichier::lectureUtilisateurPrive(fic6,listCapteur);
+	AnalyseGouverneur * ana = new AnalyseGouverneur(listAttribut,listMesure,listCapteur,listCleaner,listProvider,listUP);
 	Gouverneur* gouvernement= new Gouverneur("10",ana->getListeCapteur(),ana->getListeCleaner());
+	
 	
 	//Variable servant a naviguer dans les switch cases
 	int select = 0;;
