@@ -48,19 +48,22 @@ int main(int argc,char* argv[]){
 	
 	//Phase de lecture et de stockage de toutes les données contenues dans les fichiers .csv		
 	
-	LectureFichier lec;
+	
 	ifstream fic("../FichiersCSV/attributes.csv");
-	lec.lectureAttribut(fic,ana->getListeAttribut());
+	
+		cout<<"erreur d'ouverture = "<<fic.fail()<<endl;
+	
+	LectureFichier::lectureAttribut(fic,ana->getListeAttribut());
 	ifstream fic2("../FichiersCSV/measurements.csv");
-	lec.lectureMesure(fic2,ana->getListeMesure());
+	LectureFichier::lectureMesure(fic2,ana->getListeMesure(),ana->getListeAttribut());
 	ifstream fic3("../FichiersCSV/sensors.csv");
-	lec.lectureCapteur(fic3,ana->getListeCapteur(),ana->getListeMesure());
+	LectureFichier::lectureCapteur(fic3,ana->getListeCapteur(),ana->getListeMesure());
 	ifstream fic4("../FichiersCSV/cleaners.csv");
-	lec.lectureCleaner(fic4,ana->getListeCleaner());
+	LectureFichier::lectureCleaner(fic4,ana->getListeCleaner());
 	ifstream fic5("../FichiersCSV/providers.csv");
-	lec.lectureFournisseur(fic5,ana->getListeFournisseur(),ana->getListeCleaner());
+	LectureFichier::lectureFournisseur(fic5,ana->getListeFournisseur(),ana->getListeCleaner());
 	ifstream fic6("../FichiersCSV/users.csv");
-	lec.lectureUtilisateurPrive(fic6,ana->getListeUtilisateurPrive(),ana->getListeCapteur());
+	LectureFichier::lectureUtilisateurPrive(fic6,ana->getListeUtilisateurPrive(),ana->getListeCapteur());
 	Gouverneur* gouvernement= new Gouverneur("10",ana->getListeCapteur(),ana->getListeCleaner());
 	
 	//Variable servant a naviguer dans les switch cases
@@ -348,9 +351,9 @@ void MenuMoyZoneMoment(){
 	double longitude;
 	double latitude;
 	double rayon;
-	string date1;
-	string heure1;
-	string date;
+	int annee;
+	int mois;
+	int jour;
 
 	cout<<"nous allons déterminer la zone circulaire de recherche, entrez la latitude du centre de la zone"<<endl;
 	cin>>latitude;
@@ -358,10 +361,13 @@ void MenuMoyZoneMoment(){
 	cin>>longitude;
 	cout<<"nous allons déterminer la zone circulaire de recherche, entrez le rayon de la zone"<<endl;
 	cin>>rayon;
-	cout<<"Entrez la date de recherche au format aaaa-mm-jj"<<endl;
-	cin>>date1;
-	cout<<"Entrez l'heure de recherche au format hh:mm:ss"<<endl;
-	cin>>heure1;
+	cout<<"Entrez l'année de recherche"<<endl;
+	cin>>annee;
+	cout<<"Entrez le mois de recherche (en chiffre, par exemple pour mars entrez \"03\")"<<endl;
+	cin>>mois;
+	cout<<"Entrez le jour de recherche"<<endl;
+	cin>>jour;
+	
 	cout<<endl;
 	cout<<endl;
 	//Méthode Moy Zone Moment
@@ -372,11 +378,12 @@ void MenuMoyZonePeriode(){
 	double longitude;
 	double latitude;
 	double rayon;
-	string date1;
-	string heure1;
-	string date2;
-	string heure2;
-	string date;
+	int anneeDebut;
+	int moisDebut;
+	int jourDebut;
+	int anneeFin;
+	int moisFin;
+	int jourFin;
 
 	cout<<"nous allons déterminer la zone circulaire de recherche, entrez la latitude du centre de la zone"<<endl;
 	cin>>latitude;
@@ -384,14 +391,18 @@ void MenuMoyZonePeriode(){
 	cin>>longitude;
 	cout<<"nous allons déterminer la zone circulaire de recherche, entrez le rayon de la zone"<<endl;
 	cin>>rayon;
-	cout<<"Entrez la date de début de recherche au format aaaa-mm-jj"<<endl;
-	cin>>date1;
-	cout<<"Entrez l'heure de début de recherche au format hh:mm:ss"<<endl;
-	cin>>heure1;
-	cout<<"Entrez la date de fin de recherche au format aaaa-mm-jj"<<endl;
-	cin>>date2;
-	cout<<"Entrez l'heure de fin de recherche au format hh:mm:ss"<<endl;
-	cin>>heure2;
+	cout<<"Entrez l'année de début de recherche"<<endl;
+	cin>>anneeDebut;
+	cout<<"Entrez le mois de début de recherche (en chiffre, par exemple pour mars entrez \"03\")"<<endl;
+	cin>>moisDebut;
+	cout<<"Entrez le jour de début derecherche"<<endl;
+	cin>>jourDebut;
+	cout<<"Entrez l'année de fin de recherche"<<endl;
+	cin>>anneeFin;
+	cout<<"Entrez le mois de fin de recherche (en chiffre, par exemple pour mars entrez \"03\")"<<endl;
+	cin>>moisFin;
+	cout<<"Entrez le jour de fin derecherche"<<endl;
+	cin>>jourFin;
 	cout<<endl;
 	cout<<endl;
 	//Méthode Moy Zone Periode
@@ -400,21 +411,23 @@ void MenuMoyZonePeriode(){
 void MenuQualitePointMoment(){
 	double longitude;
 	double latitude;
-	string date1;
-	string heure1;
-	string date;
+	int annee;
+	int mois;
+	int jour;
 
 	cout<<"nous allons déterminer le point de recherche, entrez la latitude de ce point"<<endl;
 	cin>>latitude;
 	cout<<"nous allons déterminer le point de recherche, entrez la longitude de ce point"<<endl;
 	cin>>longitude;
-	cout<<"Entrez la date de recherche au format aaaa-mm-jj"<<endl;
-	cin>>date1;
-	cout<<"Entrez l'heure de recherche au format hh:mm:ss"<<endl;
-	cin>>heure1;
+	cout<<"Entrez l'année de recherche"<<endl;
+	cin>>annee;
+	cout<<"Entrez le mois de recherche (en chiffre, par exemple pour mars entrez \"03\")"<<endl;
+	cin>>mois;
+	cout<<"Entrez le jour de recherche"<<endl;
+	cin>>jour;
 
-	cout<<"la qualité de l'air à "<<to_string(longitude)<<" "+to_string(latitude)<<" à "<<date<<" est :"<<endl;
-	ana->QualitePointMoment(longitude, latitude, date);
+	cout<<"la qualité de l'air en "<<to_string(latitude)<<" / "+to_string(longitude)<<" le "<<to_string(jour)<<"/"<<to_string(mois)<<"/"<<to_string(annee)<<" est :"<<endl;
+	ana->QualitePointMoment(longitude, latitude, annee, mois, jour);
 	cout<<endl;
 	cout<<endl;
 }
@@ -481,9 +494,9 @@ void MenuAjouterCleaner(){
 	string cleanerID;
 	double latitude;
 	double longitude;
-	string date;
-	string date1;
-	string heure1;
+	int annee;
+	int mois;
+	int jour;
 
 	cout<<"Entrez le nom de votre Air'Cleaner "<<endl;
 	cin>>cleanerID;
@@ -491,13 +504,12 @@ void MenuAjouterCleaner(){
 	cin>>latitude;
 	cout<<"Entrez la longitude de votre Air'Cleaner"<<endl;
 	cin>>longitude;
-	cout<<"Entrez la date de début de fontionnement au format aaaa-mm-jj"<<endl;
-	cin>>date1;
-	cout<<"Entrez l'heure de début de fontionnement au format hh:mm:ss"<<endl;
-	cin>>heure1;
-	date=date1;
-	date=date+" ";
-	date= date+ heure1;
+	cout<<"Entrez l'année de recherche"<<endl;
+	cin>>annee;
+	cout<<"Entrez le mois de recherche (en chiffre, par exemple pour mars entrez \"03\")"<<endl;
+	cin>>mois;
+	cout<<"Entrez le jour de recherche"<<endl;
+	cin>>jour;
 	cout<<endl;
 	cout<<endl;
 	//Methode AjouterCleaner
@@ -515,16 +527,18 @@ void MenuSupprimerCleaner(){
 
 void MenuFinCleaner(){
 	string cleanerID;
-	string date;
-	string date1;
-	string heure1;
+	int annee;
+	int mois;
+	int jour;
 
 	cout<<"Entrez le nom de votre Air'Cleaner "<<endl;
 	cin>>cleanerID;
-	cout<<"Entrez la date de fin de fontionnement au format aaaa-mm-jj"<<endl;
-	cin>>date1;
-	cout<<"Entrez l'heure de fin de fontionnement au format hh:mm:ss"<<endl;
-	cin>>heure1;
+	cout<<"Entrez l'année de fin de fonctionnement du Air'Cleaner"<<endl;
+	cin>>annee;
+	cout<<"Entrez le mois de fin de fonctionnement du Air'Cleaner (en chiffre, par exemple pour mars entrez \"03\")"<<endl;
+	cin>>mois;
+	cout<<"Entrez le jour de fin de fonctionnement du Air'Cleaner"<<endl;
+	cin>>jour;
 	//Methode FinCleaner
 }
 
