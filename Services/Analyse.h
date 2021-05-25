@@ -12,12 +12,12 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include <string>
-#include "Capteur.h"
-#include "Mesure.h"
-#include "Fournisseur.h"
-#include "Cleaner.h"
-#include "UtilisateurPrive.h"
-#include "Attribut.h"
+#include "../Données/Capteur.h"
+#include "../Données/Mesure.h"
+#include "../Données/Fournisseur.h"
+#include "../Données/Cleaner.h"
+#include "../Données/UtilisateurPrive.h"
+#include "../Données/Attribut.h"
 #include <vector>
 using namespace std;
 //------------------------------------------------------------- Constantes

@@ -17,6 +17,7 @@
 #include <fstream>
 #include <math.h> 
 #include<cstring>
+#include <math.h>
 using namespace std;
 
 
