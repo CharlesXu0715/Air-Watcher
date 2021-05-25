@@ -36,9 +36,9 @@ using namespace std;
 //
 //{
 //} //----- Fin de Méthode
-void LectureFichier::lectureAttribut(ifstream &input,vector<Attribut> & listAttribut)
+vector<Attribut> LectureFichier::lectureAttribut(ifstream &input)
 {
-	
+	vector<Attribut> listAttribut;
 	int i=0;
 	string title;
 	string eol;
@@ -63,10 +63,12 @@ void LectureFichier::lectureAttribut(ifstream &input,vector<Attribut> & listAttr
 		}
 		listAttribut.push_back(Attribut (AttributID,Unit,Description));	
 	}
+	return listAttribut;
 }
 
-void LectureFichier::lectureMesure(ifstream &input, vector<Mesure> & listMesure,vector<Attribut> listAttribut)
+vector<Mesure> LectureFichier::lectureMesure(ifstream &input,vector<Attribut> listAttribut)
 {
+	vector<Mesure> listMesure;
 	int i=0;
 	string eol;
 	string Timestamp;
@@ -103,10 +105,12 @@ void LectureFichier::lectureMesure(ifstream &input, vector<Mesure> & listMesure,
 		/*Mesure m(timestamp,value,AttributeID,SensorID);
 		listMesure.push_back(m);*/
 	}
+	return listMesure;
 }
 
-void LectureFichier::lectureCapteur(ifstream &input, vector<Capteur>& listSensor,vector<Mesure> & listMesure)
+vector<Capteur> LectureFichier::lectureCapteur(ifstream &input,vector<Mesure> & listMesure)
 {
+	vector<Capteur> listSensor;
 	int i=0;
 	string eol;
 	string SensorID;
@@ -138,11 +142,12 @@ void LectureFichier::lectureCapteur(ifstream &input, vector<Capteur>& listSensor
 			}
 		listSensor.push_back(s);
 	}
-	
+	return listSensor;
 }
 
-void LectureFichier::lectureCleaner(ifstream &input, vector<Cleaner>& listCleaner)
+vector<Cleaner> LectureFichier::lectureCleaner(ifstream &input)
 {
+	vector<Cleaner> listCleaner;
 	int i=0;
 	string eol;
 	string CleanerID;
@@ -175,10 +180,12 @@ void LectureFichier::lectureCleaner(ifstream &input, vector<Cleaner>& listCleane
 		Cleaner c(CleanerID,Latitude,Longitude,dD,dF);
 		listCleaner.push_back(c);
 	}
+	return listCleaner;
 }
 
-void LectureFichier::lectureFournisseur(ifstream &input, vector<Fournisseur>& listProvider,vector<Cleaner>& listCleaner)
+vector<Fournisseur> LectureFichier::lectureFournisseur(ifstream &input,vector<Cleaner>& listCleaner)
 {
+	vector<Fournisseur> listProvider;
 	int i=0;
 	string eol;
 	string ProviderID;
@@ -209,10 +216,12 @@ void LectureFichier::lectureFournisseur(ifstream &input, vector<Fournisseur>& li
 			}
 		//listProvider.push_back(p);
 	}
+	return listProvider;
 }
 
-void LectureFichier::lectureUtilisateurPrive(ifstream &input, vector<UtilisateurPrive>& listUP,vector<Capteur>& listSensor)
+vector<UtilisateurPrive> LectureFichier::lectureUtilisateurPrive(ifstream &input,vector<Capteur>& listSensor)
 {
+	vector<UtilisateurPrive> listUP;
 	int i=0;
 	string eol;
 	string UserID;
@@ -240,6 +249,7 @@ void LectureFichier::lectureUtilisateurPrive(ifstream &input, vector<Utilisateur
 			}
 		listUP.push_back(u);
 	}
+	return listUP;
 }
 
 tm LectureFichier::gettimem(string time){//methode qui renvoie un mt a partir d'un string

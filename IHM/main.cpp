@@ -37,8 +37,8 @@ void MenuFinCleaner();
 void MenuQualiteCleaner();
 
 
-//Variables servant à appeler les fonctions
-AnalyseGouverneur * ana = new AnalyseGouverneur();
+
+
 
 
 
@@ -48,19 +48,21 @@ int main(int argc,char* argv[]){
 	
 	//Phase de lecture et de stockage de toutes les données contenues dans les fichiers .csv		
 	
-	LectureFichier lec;
+	//Variables servant à appeler les fonctions
+	
 	ifstream fic("../FichiersCSV/attributes.csv");
-	lec.lectureAttribut(fic,ana->getListeAttribut());
+	vector<Attribut> listAttribut=LectureFichier::lectureAttribut(fic);
 	ifstream fic2("../FichiersCSV/measurements.csv");
-	lec.lectureMesure(fic2,ana->getListeMesure());
+	vector<Mesure> listMesure=LectureFichier::lectureMesure(fic2,listAttribut);
 	ifstream fic3("../FichiersCSV/sensors.csv");
-	lec.lectureCapteur(fic3,ana->getListeCapteur(),ana->getListeMesure());
+	vector<Capteur> listCapteur=LectureFichier::lectureCapteur(fic3,listMesure);
 	ifstream fic4("../FichiersCSV/cleaners.csv");
-	lec.lectureCleaner(fic4,ana->getListeCleaner());
+	vector<Cleaner> listCleaner=LectureFichier::lectureCleaner(fic4);
 	ifstream fic5("../FichiersCSV/providers.csv");
-	lec.lectureFournisseur(fic5,ana->getListeFournisseur(),ana->getListeCleaner());
+	vector<Fournisseur> listProvider=LectureFichier::lectureFournisseur(fic5,listCleaner);
 	ifstream fic6("../FichiersCSV/users.csv");
-	lec.lectureUtilisateurPrive(fic6,ana->getListeUtilisateurPrive(),ana->getListeCapteur());
+	vector<UtilisateurPrive> listUP=LectureFichier::lectureUtilisateurPrive(fic6,listCapteur);
+	AnalyseGouverneur * ana = new AnalyseGouverneur(listAttribut,listMesure,listCapteur,listCleaner,listProvider,listUP);
 	Gouverneur* gouvernement= new Gouverneur("10",ana->getListeCapteur(),ana->getListeCleaner());
 	
 	//Variable servant a naviguer dans les switch cases
@@ -100,6 +102,7 @@ int main(int argc,char* argv[]){
 						case 1:
 							//Méthode Capteurs défaillants
 							select = 0;
+							
 						break;
 
 						case 2:
@@ -414,7 +417,7 @@ void MenuQualitePointMoment(){
 	cin>>heure1;
 
 	cout<<"la qualité de l'air à "<<to_string(longitude)<<" "+to_string(latitude)<<" à "<<date<<" est :"<<endl;
-	ana->QualitePointMoment(longitude, latitude, date);
+	//ana->QualitePointMoment(longitude, latitude, date);
 	cout<<endl;
 	cout<<endl;
 }

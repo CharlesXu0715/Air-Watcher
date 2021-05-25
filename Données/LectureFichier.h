@@ -40,12 +40,12 @@ public:
     
 //----------------------------------------------------- Constructeurs
 
-static void lectureAttribut(ifstream &input,vector<Attribut> &);
-static void lectureMesure(ifstream &input, vector<Mesure> & listMesure, vector<Attribut> listAttribut);
-static void lectureCapteur(ifstream &input, vector<Capteur>& listSensor,vector<Mesure> & listMesure);
-static void lectureCleaner(ifstream &input, vector<Cleaner>& listCleaner);
-static void lectureFournisseur(ifstream &input, vector<Fournisseur>& listProvider,vector<Cleaner>& listCleaner);
-static void lectureUtilisateurPrive(ifstream &input, vector<UtilisateurPrive>& listUP,vector<Capteur>& listSensor);
+static vector<Attribut> lectureAttribut(ifstream &input);
+static vector<Mesure> lectureMesure(ifstream &input, vector<Attribut> listAttribut);
+static vector<Capteur> lectureCapteur(ifstream &input,vector<Mesure> & listMesure);
+static vector<Cleaner> lectureCleaner(ifstream &input);
+static vector<Fournisseur> lectureFournisseur(ifstream &input,vector<Cleaner>& listCleaner);
+static vector<UtilisateurPrive> lectureUtilisateurPrive(ifstream &input,vector<Capteur>& listSensor);
 static tm gettimem(string time);
 
 //----------------------------------------------------- Destructeur

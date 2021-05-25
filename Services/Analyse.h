@@ -39,10 +39,10 @@ public:
 //------------------------------------------------- Surcharge d'opérateurs
    
 //----------------------------------------------------- Constructeurs
-Analyse();
+Analyse(vector<Attribut> listAttribut,vector<Mesure> listMesure,vector<Capteur> listCapteur,vector<Cleaner> listCleaner,vector<Fournisseur> listProvider,vector<UtilisateurPrive> listUP);
 
 
-Analyse ( const Analyse & unTypeMesure );
+Analyse ( const Analyse & unAnalyse );
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
@@ -54,8 +54,7 @@ Analyse ( const Analyse & unTypeMesure );
 ~Analyse();
 
 //----------------------------------------------------- Méthodes publiques
- 
-void setListeAttribut(vector<Attribut>  l);
+
 vector<Capteur> & getListeCapteur();
 vector<Mesure> & getListeMesure();
 vector<Fournisseur> & getListeFournisseur();

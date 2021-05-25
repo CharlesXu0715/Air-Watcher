@@ -34,10 +34,10 @@ public:
 //------------------------------------------------- Surcharge d'opérateurs
     
 //----------------------------------------------------- Constructeurs
-AnalyseGouverneur();
+AnalyseGouverneur(vector<Attribut> listAttribut,vector<Mesure> listMesure,vector<Capteur> listCapteur,vector<Cleaner> listCleaner,vector<Fournisseur> listProvider,vector<UtilisateurPrive> listUP);
 
 
-AnalyseGouverneur ( const AnalyseGouverneur & unTypeMesure );
+//AnalyseGouverneur ( const AnalyseGouverneur & unAnalyseGouverneur );
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
