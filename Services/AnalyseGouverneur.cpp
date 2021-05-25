@@ -33,11 +33,14 @@ using namespace std;
 //
 //{
 //} //----- Fin de Méthode
-/*
-void AnalyseGouverneur::sensorsSimilairs(string lat, string lon, float rayonEnKm, int dureeEnMois, float precision){
+/*void AnalyseGouverneur::sensorsSimilairs(string capteurID, int dureeEnMois, float precision){
 
   sensorsSimilaires.clear();
   const float earthRadiusInKm = 6371;
+  
+
+  vector<Capteur>::iterator it;
+  for (it=)
 
   //obtenir temps actuel
   time_t rawtime;
@@ -95,10 +98,11 @@ void AnalyseGouverneur::sensorsSimilairs(string lat, string lon, float rayonEnKm
  return;
 }*/
 
+
 //------------------------------------------------- Surcharge d'opérateurs
 
 //-------------------------------------------- Constructeurs - destructeur
-AnalyseGouverneur::AnalyseGouverneur ( const AnalyseGouverneur & uneAnalyse )
+/*AnalyseGouverneur::AnalyseGouverneur ( const AnalyseGouverneur & uneAnalyseGouverneur )
 // Algorithme :
 //
 {
@@ -106,9 +110,9 @@ AnalyseGouverneur::AnalyseGouverneur ( const AnalyseGouverneur & uneAnalyse )
     cout << "Appel au constructeur de copie de <Analyse>" << endl;
 #endif
 } //----- Fin de Analyse (constructeur de copie)
+*/
 
-
-AnalyseGouverneur::AnalyseGouverneur ()
+AnalyseGouverneur::AnalyseGouverneur (vector<Attribut> listAttribut,vector<Mesure> listMesure,vector<Capteur> listCapteur,vector<Cleaner> listCleaner,vector<Fournisseur> listProvider,vector<UtilisateurPrive> listUP):Analyse(listAttribut,listMesure,listCapteur,listCleaner,listProvider,listUP)
 // Algorithme :
 //
 {

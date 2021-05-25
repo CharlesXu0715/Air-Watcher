@@ -41,6 +41,15 @@ using namespace std;
 //------------------------------------------------- Surcharge d'opérateurs
 
 //-------------------------------------------- Constructeurs - destructeur
+Analyse::Analyse(vector<Attribut> listAttribut,vector<Mesure> listMesure,vector<Capteur> listCapteur,vector<Cleaner> listCleaner,vector<Fournisseur> listProvider,vector<UtilisateurPrive> listUP)
+{
+	collectionCapteur=listCapteur;
+    collectionMesure=listMesure;
+    collectionFournisseur=listProvider;
+    collectionCleaner=listCleaner;
+    collectionUtilisateurPrive=listUP;
+    collectionAttribut=listAttribut;
+}
 Analyse::Analyse ( const Analyse & uneAnalyse )
 // Algorithme :
 //
@@ -51,17 +60,6 @@ Analyse::Analyse ( const Analyse & uneAnalyse )
 } //----- Fin de Analyse (constructeur de copie)
 
 
-Analyse::Analyse ()
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de <Analyse>" << endl;
-#endif
-
-   
-    
-} //----- Fin de Analyse
 /*
 void Analyse::setListeAttribut(vector<Attribut> l){
 	vector<Attribut>::iterator it;
