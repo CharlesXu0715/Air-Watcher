@@ -63,9 +63,9 @@ vector<Cleaner> & getListeCleaner();
 vector<UtilisateurPrive> & getListeUtilisateurPrive();
 vector<Attribut> & getListeAttribut();
 
-void QualitePointMoment(double longitude, double latitude, string date);
+void QualitePointMoment(double longitude, double latitude, int annee, int mois, int jour);
 vector<Capteur>  capteurDansLaZone(double longitude, double latitude, double rayon);
-double CalculeQualiteAir(vector<Capteur> listCapt,string date);
+int CalculeQualiteAir(double lat, double lon, double rayon, int annee, int mois, int jour, bool affichage);
 
 //------------------------------------------------------------------ PRIVE
 

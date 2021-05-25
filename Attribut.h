@@ -1,70 +1,57 @@
 /*************************************************************************
-                           TypeMesure  -  description
+                           Attribut  -  description
                              -------------------
-    début                : 20.10.2020
-    copyright            : (C) 2020 par Julien BOUVIER
-    e-mail               : julien.bouvier@insa-lyon.fr
+    copyright            : (C) XU Yuantao
 *************************************************************************/
 
-//---------- Interface de la classe <TypeMesure> (fichier TypeMesure.h) ----------------
-#if ! defined ( ATTRIBUT_H )
-#define ATTRIBUT_H
+//---------- Interface de la classe <Attribut> (fichier Attribut.h) ----------------
+#if ! defined ( Attribut_H )
+#define Attribut_H
 
-//--------------------------------------------------- Interfaces utilisées
-#include <string>
-
+#include <string.h>
 using namespace std;
-//------------------------------------------------------------- Constantes
 
-//------------------------------------------------------------------ Types
 
-//------------------------------------------------------------------------
-// Rôle de la classe <TypeMesure>
-//
-//
-//------------------------------------------------------------------------
 
-class Attribut 
+class Attribut
 {
 //----------------------------------------------------------------- PUBLIC
 
 public:
 
-//------------------------------------------------- Surcharge d'opérateurs
-    
-//----------------------------------------------------- Constructeurs
-Attribut(string,string,string);
+//-------------------------------------------- Constructeurs
+    Attribut (string unit, string description, string id);
+
+    Attribut ();
+
+//-------------------------------------------- getters
+
+    string getUnit();
+
+    string getID();
+
+    string getDescription();
+
+//-------------------------------------------- setters
+
+    void setUnit(string unit);
+
+    void setDescription(string description);
+
+    virtual ~Attribut ( );
 
 
-Attribut ( const Attribut & unTypeMesure );
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
-
-
-
-//----------------------------------------------------- Destructeur
-~Attribut();
-
-//----------------------------------------------------- Méthodes publiques
- 
-string getAttributID();
-//------------------------------------------------------------------ PRIVE
 
 protected:
-//----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-   
-  string attributID;
-  string unit;
-  string description;
-   
-  
-    
+
+string attributeID;
+string unit;
+string description;
+
 };
 
-//-------------------------------- Autres définitions dépendantes de <TypeMesure>
+//-------------------------------- Autres définitions dépendantes de <Attribut>
 
-#endif // TypeMesure_H
+#endif // Attribut_H

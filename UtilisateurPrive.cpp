@@ -34,11 +34,25 @@ using namespace std;
 //
 //{
 //} //----- Fin de Méthode
-string & UtilisateurPrive::getUtilisateurID(){
+
+int UtilisateurPrive::getNbPoints() {
+    return nbPoints;
+}
+
+
+void UtilisateurPrive::ajouterCapteur(Capteur unCapteur) {
+    mesCapteurs.push_back(unCapteur);
+}
+
+void UtilisateurPrive::setNbPoints(int unNbPoints) {
+    nbPoints = unNbPoints;
+}
+
+string UtilisateurPrive::getUtilisateurID(){
 	return utilisateurID;
 }
 
-vector<Capteur> & UtilisateurPrive::getListeCapteur(){
+vector<Capteur> UtilisateurPrive::getListeCapteur(){
 	return  mesCapteurs;
 }
 

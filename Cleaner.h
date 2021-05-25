@@ -31,28 +31,33 @@ class Cleaner
 public:
 
 //------------------------------------------------- Surcharge d'opérateurs
-    string & getCapteurID();
-    string & getLatitude();
-    string & getLongitude();
-    string & getDateDebut();
-    string & getDateFin();
+    
+    
 //----------------------------------------------------- Constructeurs
-Cleaner(string a,string b,string c,string d, string e);
 
+	Cleaner();
 
-Cleaner ( const Cleaner & unTypeMesure );
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
+    Cleaner(string unelatitude,string unelongitude,string uncleanerID, struct tm* unedateFin, struct tm* unedateDebut);
 
-
+    
 
 //----------------------------------------------------- Destructeur
-~Cleaner();
+	virtual ~Cleaner();
 
 //----------------------------------------------------- Méthodes publiques
- 
+	//getters
+    string getID();
+    string getLatitude();
+    string getLongitude();
+    struct tm* getDateDebut();
+    struct tm* getDateFin();
+
+    //setters
+    void setID(string uncleanerID);
+    void setLatitute(string uneLatitute);
+    void setLongitude(string uneLongitude);
+    void setDateDebut(struct tm* uneDateDebut);
+    void setDateFin(struct tm* uneDateFin);
 
 //------------------------------------------------------------------ PRIVE
 
@@ -61,11 +66,12 @@ protected:
 
 //----------------------------------------------------- Attributs protégés
    
-   string capteurID;
-   string latitude;
-   string longitude;
-   string dateDebut;
-   string dateFin;
+    string latitude;
+    string longitude;
+    string cleanerID;
+    struct tm* dateFin; //date de desinstallation du Cleaner
+    struct tm* dateDebut; //date d'installation du Cleaner
+    string providerID;
    
   
     

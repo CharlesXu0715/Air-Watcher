@@ -34,8 +34,7 @@ class UtilisateurPrive
 public:
 
 //------------------------------------------------- Surcharge d'opérateurs
-    string & getUtilisateurID();
-    vector<Capteur> & getListeCapteur();
+
 //----------------------------------------------------- Constructeurs
 UtilisateurPrive(string a);
 
@@ -53,6 +52,15 @@ UtilisateurPrive ( const UtilisateurPrive & unUtilisateurPrive );
 
 //----------------------------------------------------- Méthodes publiques
  
+int getNbPoints();
+
+void setNbPoints(int unNbPoints);
+
+void ajouterCapteur(Capteur unCapteur);
+
+vector<Capteur> getListeCapteur();
+
+string getUtilisateurID();
 
 //------------------------------------------------------------------ PRIVE
 
@@ -63,7 +71,7 @@ protected:
    
    string utilisateurID;
    vector<Capteur> mesCapteurs;
-   
+   int nbPoints;
    
   
     

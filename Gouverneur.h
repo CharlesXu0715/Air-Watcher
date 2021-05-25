@@ -35,11 +35,11 @@ class Gouverneur
 public:
 
 //------------------------------------------------- Surcharge d'opérateurs
-    string & getGouverneurID();
-    vector<Capteur> & getListeCapteur();
-    vector<Cleaner> & getListeCleaner();
+    string getGouverneurID();
+    vector<Capteur> getListeCapteur();
+    vector<Cleaner> getListeCleaner();
 //----------------------------------------------------- Constructeurs
-Gouverneur(string a,vector<Capteur> & listCapt,vector<Cleaner> & listClean);
+Gouverneur(string a,vector<Capteur> listCapt,vector<Cleaner> listClean);
 
 
 Gouverneur ( const Gouverneur & unGouverneur );

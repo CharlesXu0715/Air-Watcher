@@ -12,6 +12,7 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include <string>
+#include "Attribut.h"
 
 using namespace std;
 //------------------------------------------------------------- Constantes
@@ -31,15 +32,12 @@ class Mesure
 public:
 
 //------------------------------------------------- Surcharge d'opérateurs
-string & getDate();
-string & getCapteurID();
-string & getAttributeID();
-string & getValue();
+
 //----------------------------------------------------- Constructeurs
-Mesure(string,string,string,string);
+Mesure(tm Timestamp, float value, Attribut mt, string sensId);
 
 
-Mesure ( const Mesure & unTypeMesure );
+Mesure ( const Mesure & uneMesure );
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
@@ -48,10 +46,26 @@ Mesure ( const Mesure & unTypeMesure );
 
 
 //----------------------------------------------------- Destructeur
-~Mesure();
-
+    virtual ~Mesure ( );
 //----------------------------------------------------- Méthodes publiques
- 
+
+//getters
+    tm getTime();
+
+    Attribut getAttribut();
+
+    float getValue();
+
+    string getCapteurID();
+
+//setters
+    void setTime(tm time);
+
+    void setValue(float value);
+
+    void setAttribut(Attribut mt);
+
+
 
 //------------------------------------------------------------------ PRIVE
 
@@ -59,10 +73,10 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-   string date;
-   string capteurID;
-   string attributeID;
-   string value;
+    tm Timestamp;
+	float value;
+	Attribut mt;
+	string capteurID;
    //vector<Attribut> collectionAttribut;
     
 };

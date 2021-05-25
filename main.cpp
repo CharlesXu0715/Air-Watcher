@@ -28,7 +28,7 @@ int main(int argc,char* argv[]){
 	ifstream fic("attributes.csv");
 	lec.lectureAttribut(fic,ana->getListeAttribut());
 	ifstream fic2("measurements.csv");
-	lec.lectureMesure(fic2,ana->getListeMesure());
+	lec.lectureMesure(fic2,ana->getListeMesure(),ana->getListeAttribut());
 	ifstream fic3("sensors.csv");
 	lec.lectureCapteur(fic3,ana->getListeCapteur(),ana->getListeMesure());
 	ifstream fic4("cleaners.csv");
@@ -40,111 +40,8 @@ int main(int argc,char* argv[]){
 	
 	Gouverneur* gouvernement= new Gouverneur("10",ana->getListeCapteur(),ana->getListeCleaner());
 	
-	/*
-	string buffer;
 	
-	vector<Attribut>::iterator it;
-	
-	
-		for (it=ana->getListeAttribut().begin();it!=ana->getListeAttribut().end();it++)
-		{
-			buffer=it->getAttributID();
-			if(buffer==""){
-				cout<<"vide"<<endl;
-			}
-			
-			cout<<buffer<<endl;
-		}
-		
-	vector<Mesure>::iterator it2;
-	
-	
-		for (it2=ana->getListeMesure().begin();it2!=ana->getListeMesure().end();it2++)
-		{
-			buffer=it2->getDate()+" "+it2->getCapteurID()+" "+it2->getAttributeID()+" "+it2->getValue();
-			if(buffer==""){
-				cout<<"vide"<<endl;
-			}
-			
-			cout<<buffer<<endl;
-		}
-		
-		vector<Capteur>::iterator it3;
-		vector<Mesure>::iterator it4;
-	
-		for (it3=ana->getListeCapteur().begin();it3!=ana->getListeCapteur().end();it3++)
-		{
-			buffer=it3->getCapteurID()+" "+it3->getLongitude()+" "+it3->getLatitude();
-			if(buffer==""){
-				cout<<"vide"<<endl;
-			}
-			cout<<buffer<<endl;
-				for (it4=it3->getListeMesure().begin();it4!=it3->getListeMesure().end();it4++)
-				{
-					buffer="     "+it4->getDate()+" "+it4->getCapteurID()+" "+it4->getAttributeID()+" "+it4->getValue();
-					cout<<buffer<<endl;
-				}
-		
-		}
-		
-		vector<Cleaner>::iterator it5;
-		for (it5=ana->getListeCleaner().begin();it5!=ana->getListeCleaner().end();it5++)
-		{
-			buffer=it5->getCapteurID()+" "+it5->getLatitude()+" "+it5->getLongitude()+" "+it5->getDateDebut()+" "+it5->getDateFin();
-			if(buffer==""){
-				cout<<"vide"<<endl;
-			}
-			
-			cout<<buffer<<endl;
-		}
-		
-		
-		vector<Fournisseur>::iterator it6;
-		vector<Cleaner>::iterator it7;
-		
-		for (it6=ana->getListeFournisseur().begin();it6!=ana->getListeFournisseur().end();it6++)
-		{
-			buffer=it6->getFournisseurID();
-			if(buffer==""){
-				cout<<"vide"<<endl;
-			}
-			cout<<buffer<<endl;
-			
-				for (it7=it6->getListeCleaner().begin();it7!=it6->getListeCleaner().end();it7++)
-				{
-					buffer="    "+it7->getCapteurID()+" "+it7->getLatitude()+" "+it7->getLongitude()+" "+it7->getDateDebut()+" "+it7->getDateFin();
-					cout<<buffer<<endl;
-				}
-				
-		}
-		
-		vector<UtilisateurPrive>::iterator it8;
-		vector<Capteur>::iterator it9;
-		vector<Mesure>::iterator it10;
-		
-		for (it8=ana->getListeUtilisateurPrive().begin();it8!=ana->getListeUtilisateurPrive().end();it8++)
-		{
-			buffer=it8->getUtilisateurID();
-			if(buffer==""){
-				cout<<"vide"<<endl;
-			}
-			cout<<buffer<<endl;
-				for (it9=it8->getListeCapteur().begin();it9!=it8->getListeCapteur().end();it9++)
-				{
-					buffer="    "+it9->getCapteurID()+" "+it9->getLongitude()+" "+it9->getLatitude();;
-					cout<<buffer<<endl;
-					
-					for (it10=it9->getListeMesure().begin();it10!=it9->getListeMesure().end();it10++)
-					{
-						buffer="         "+it10->getDate()+" "+it10->getCapteurID()+" "+it10->getAttributeID()+" "+it10->getValue();
-						cout<<buffer<<endl;
-					}
-					
-				}
-		
-		}
-		*/
-		int select = 0;;
+	int select = 0;;
 	string ID;
 	double latitude;
 	double longitude;
@@ -195,9 +92,10 @@ while(1){
 			cout<<endl;
 			}
 			switch(select){
-
+				
 				case 1:
 				select = 0;
+				
 				break;
 
 				case 2:
@@ -293,7 +191,7 @@ while(1){
 					date=date+" ";
 					date= date+ heure1;
 					cout<<"la qualité de l'air à "<<to_string(longitude)<<" "+to_string(latitude)<<" à "<<date<<" est :"<<endl;
-					ana->QualitePointMoment(longitude, latitude, date);
+					//ana->QualitePointMoment(longitude, latitude, date);
 					cout<<endl;
 					cout<<endl;
 				select = 0;

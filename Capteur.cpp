@@ -33,26 +33,41 @@ using namespace std;
 //
 //{
 //} //----- Fin de Méthode
-string & Capteur::getCapteurID(){
+string Capteur::getCapteurID(){
 	return capteurID;
 }
 
-string & Capteur::getLatitude(){
+string Capteur::getLatitude(){
 	return latitude;
 }
 
-string & Capteur::getLongitude(){
+string Capteur::getLongitude(){
 	return longitude;
 }
 
-bool & Capteur::getDefaillant(){
+bool Capteur::getDefaillant(){
 	return defaillant;
 }
 
-vector<Mesure> & Capteur::getListeMesure(){
+vector<Mesure> Capteur::getListeMesure(){
 	return  collectionMesure;
 }
 
+void Capteur::setCaptureID(string unID) {
+    capteurID = unID;
+}
+
+void Capteur::setLatitude(string unLatitude) {
+    latitude = unLatitude;
+}
+
+void Capteur::setLongitude(string unLongitude) {
+    longitude = unLongitude;
+}
+
+void Capteur::setDefaillant(bool unLabel) {
+    defaillant = unLabel;
+}
 
 //------------------------------------------------- Surcharge d'opérateurs
 

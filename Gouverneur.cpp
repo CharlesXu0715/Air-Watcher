@@ -33,15 +33,15 @@ using namespace std;
 //
 //{
 //} //----- Fin de Méthode
-string & Gouverneur::getGouverneurID(){
+string Gouverneur::getGouverneurID(){
 	return gouverneurID;
 }
 
-vector<Capteur> & Gouverneur::getListeCapteur(){
+vector<Capteur> Gouverneur::getListeCapteur(){
 	return  tousLesCapteurs;
 }
 
-vector<Cleaner> & Gouverneur::getListeCleaner(){
+vector<Cleaner> Gouverneur::getListeCleaner(){
 	return  tousLesCleaners;
 }
 
@@ -59,7 +59,7 @@ Gouverneur::Gouverneur ( const Gouverneur & unGouverneur )
 } //----- Fin de Analyse (constructeur de copie)
 
 
-Gouverneur::Gouverneur (string a,vector<Capteur> & listCapt,vector<Cleaner> & listClean)
+Gouverneur::Gouverneur (string a,vector<Capteur> listCapt,vector<Cleaner> listClean)
 // Algorithme :
 //
 {

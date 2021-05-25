@@ -34,11 +34,15 @@ class Capteur
 public:
 
 //------------------------------------------------- Surcharge d'opérateurs
-    string & getCapteurID();
-    string & getLatitude();
-    string & getLongitude();
-    bool & getDefaillant();
-    vector<Mesure> & getListeMesure();
+    string getCapteurID();
+    string getLatitude();
+    string getLongitude();
+    bool getDefaillant();
+    vector<Mesure> getListeMesure();
+    void setLatitude(string unLatitude);
+    void setLongitude(string unLongitude);
+    void setDefaillant(bool unLabel);
+    void setCaptureID(string unID);
 //----------------------------------------------------- Constructeurs
 Capteur(string,string,string);
 

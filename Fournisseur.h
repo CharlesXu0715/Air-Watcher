@@ -34,13 +34,25 @@ class Fournisseur
 public:
 
 //------------------------------------------------- Surcharge d'opérateurs
-    string & getFournisseurID();
-    vector<Cleaner> & getListeCleaner();
+    //methode pour ajouter un nouveau cleaner a la liste
+    void ajouterCleaner(Cleaner unCleaner);
+
+    //methode pour supprimer un cleaner existant dans la liste
+    void supprimerCleaner(string cleanerId, struct tm* dateFin);
+
+    //getters
+    string getID();
+
+    vector<Cleaner> getListeCleaner();
+
+    //setters
+
+    void setID(string unproviderID);
 //----------------------------------------------------- Constructeurs
-Fournisseur(string a);
+Fournisseur(string providerID, Cleaner unCleaner);
 
 
-Fournisseur ( const Fournisseur & unTypeMesure );
+Fournisseur ( const Fournisseur & unFournisseur );
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
@@ -49,7 +61,7 @@ Fournisseur ( const Fournisseur & unTypeMesure );
 
 
 //----------------------------------------------------- Destructeur
-~Fournisseur();
+virtual ~Fournisseur();
 
 //----------------------------------------------------- Méthodes publiques
  
