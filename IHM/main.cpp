@@ -63,6 +63,7 @@ int main(int argc,char* argv[]){
 	AnalyseGouverneur * ana = new AnalyseGouverneur(listAttribut,listMesure,listCapteur,listCleaner,listProvider,listUP);
 	Gouverneur* gouvernement= new Gouverneur("10",ana->getListeCapteur(),ana->getListeCleaner());
 	
+	
 	//Variable servant a naviguer dans les switch cases
 	int select = 0;;
 	
