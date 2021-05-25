@@ -64,7 +64,7 @@ int main(int argc,char* argv[]){
 	Gouverneur* gouvernement= new Gouverneur("10",ana->getListeCapteur(),ana->getListeCleaner());
 	
 	//Variable servant a naviguer dans les switch cases
-	int select = 0;;
+	int select = 0;
 	
 	//Booléens indiquant quel type d'utilisateur est en train d'interragir
 	bool gouv=false;
