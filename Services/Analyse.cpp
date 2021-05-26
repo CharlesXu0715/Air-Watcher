@@ -380,7 +380,7 @@ int Analyse::CalculeQualiteAir(double lat, double lon, double rayon, int annee,i
 	//Affichage des resultats
 	cout << "----Get Aggregate Infomation Algorithm----\n";
 	if(totalMesuresPM10 == 0 || totalMesuresSO2 == 0 || totalMesuresO3 == 0 || totalMesuresNO2 == 0 ){
-	cout << "Source de data insuffisante \n";
+	cout << "Aucune Mesure ce jour la \n";
 	}else{
 	cout << "PM10 : " <<  moyPM10   << "\n";
 	cout << "SO2 : " <<  moySO2   << "\n";
