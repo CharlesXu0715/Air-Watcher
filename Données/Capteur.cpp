@@ -76,6 +76,13 @@ void Capteur::setDefaillant(bool unLabel) {
 //------------------------------------------------- Surcharge d'opérateurs
 
 //-------------------------------------------- Constructeurs - destructeur
+Capteur::Capteur()
+{
+	capteurID="";
+   latitude="";
+   longitude="";
+   defaillant=false;
+}
 Capteur::Capteur ( const Capteur & unCapteur )
 // Algorithme :
 //

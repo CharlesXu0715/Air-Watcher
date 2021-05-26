@@ -46,7 +46,7 @@ public:
     void setCaptureID(string unID);
 //----------------------------------------------------- Constructeurs
 Capteur(string,string,string);
-
+Capteur();
 
 Capteur ( const Capteur & unTypeMesure );
     // Mode d'emploi (constructeur de copie) :

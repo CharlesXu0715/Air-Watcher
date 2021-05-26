@@ -433,9 +433,10 @@ void MenuSimilarite(AnalyseGouverneur * ana2){
 	cin>>mois;
 	cout<<"Entrez l'année de recherche"<<endl;
 	cin>>annee;
+	ana2->AfficherCapteurs();
 	cout<<"Entrez le capteurID reférence pour trouver les capteurs similaires"<<endl;
 	cin>>ID;
-	ana2->Similarite(ID,annee,mois);
+	ana2->sensorsSimilairs(ID,annee,mois);
 }
 
 void MenuQualitePointMoment(AnalyseGouverneur * ana2){
