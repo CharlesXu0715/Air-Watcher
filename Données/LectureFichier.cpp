@@ -142,7 +142,8 @@ vector<Capteur> LectureFichier::lectureCapteur(ifstream &input,vector<Mesure> & 
 			{
 				if (SensorID==mes->getCapteurID())
 				{
-					s.getListeMesure().push_back(*mes);
+					//s.getListeMesure().push_back(*mes);
+					s.ajouterMesure(*mes);
 				}
 			}
 		listSensor.push_back(s);

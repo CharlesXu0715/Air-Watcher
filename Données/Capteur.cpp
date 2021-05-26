@@ -49,8 +49,12 @@ bool Capteur::getDefaillant(){
 	return defaillant;
 }
 
-vector<Mesure> Capteur::getListeMesure(){
+vector<Mesure>  Capteur::getListeMesure(){
 	return  collectionMesure;
+}
+
+void Capteur::ajouterMesure(Mesure m){
+	collectionMesure.push_back(m);
 }
 
 void Capteur::setCaptureID(string unID) {

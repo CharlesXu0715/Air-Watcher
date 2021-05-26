@@ -22,7 +22,7 @@ int MenuGouv();
 int MenuStatGouv();
 void MenuMoyZoneMoment();
 void MenuMoyZonePeriode();
-void MenuQualitePointMoment();
+void MenuQualitePointMoment(AnalyseGouverneur *);
 
 int MenuUtilisateur(string);
 void MenuAjouterCapteur();
@@ -62,14 +62,7 @@ int main(int argc,char* argv[]){
 	vector<UtilisateurPrive> listUP=LectureFichier::lectureUtilisateurPrive(fic6,listCapteur);
 	AnalyseGouverneur * ana = new AnalyseGouverneur(listAttribut,listMesure,listCapteur,listCleaner,listProvider,listUP);
 	Gouverneur* gouvernement= new Gouverneur("10",ana->getListeCapteur(),ana->getListeCleaner());
-	cout<<listAttribut.size()<<endl;
-	cout<<listMesure.size()<<endl;
-	cout<<listCapteur.size()<<endl;
-	cout<<listCleaner.size()<<endl;
-	cout<<listProvider.size()<<endl;
-	cout<<listUP.size()<<endl;
 	
-	cout<<ana->getListeCapteur().size()<<endl;
 	
 	
 	int select = 0;;
@@ -158,7 +151,8 @@ int main(int argc,char* argv[]){
 						break;
 
 						case 6:
-							MenuQualitePointMoment();
+							//ana->QualitePointMoment(1.8, 44.0, 2019, 8,11);
+							MenuQualitePointMoment(ana);
 							select = 0;
 						break;
 
@@ -416,7 +410,7 @@ void MenuMoyZonePeriode(){
 	//Méthode Moy Zone Periode
 }
 
-void MenuQualitePointMoment(){
+void MenuQualitePointMoment(AnalyseGouverneur * ana2){
 	double longitude;
 	double latitude;
 	int annee;
@@ -435,7 +429,7 @@ void MenuQualitePointMoment(){
 	cin>>annee;
 
 	cout<<"la qualité de l'air en "<<to_string(latitude)<<" / "+to_string(longitude)<<" le "<<to_string(jour)<<"/"<<to_string(mois)<<"/"<<to_string(annee)<<" est :"<<endl;
-	ana->QualitePointMoment(longitude, latitude, annee, mois, jour);
+	ana2->QualitePointMoment(longitude, latitude, annee, mois, jour);
 	cout<<endl;
 	cout<<endl;
 }

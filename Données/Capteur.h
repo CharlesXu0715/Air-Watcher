@@ -39,6 +39,7 @@ public:
     string getLongitude();
     bool getDefaillant();
     vector<Mesure> getListeMesure();
+    void ajouterMesure(Mesure m);
     void setLatitude(string unLatitude);
     void setLongitude(string unLongitude);
     void setDefaillant(bool unLabel);

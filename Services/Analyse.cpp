@@ -95,14 +95,15 @@ vector<UtilisateurPrive> & Analyse::getListeUtilisateurPrive(){
 }
 
 void Analyse::QualitePointMoment(double longitude, double latitude, int annee, int mois, int jour){
-	double rayon =2.0;
-	cout<<"1"<<endl;
-	vector<Capteur> listCapt=capteurDansLaZone(longitude,latitude,rayon);
-	cout<<"2"<<endl;
+	double rayon =2;
+	
+	vector<Capteur> listCapt(capteurDansLaZone(longitude,latitude,rayon));
+	
 	if(listCapt.empty()==true){
 		cout<<"Aucun Capteur dans la zone reessayer avec d'autres positions"<<endl;
+	
 	}else{
-		cout<<"3"<<endl;
+		
 		CalculeQualiteAir(latitude,longitude,rayon,annee,mois,jour,true);
 	}
 
@@ -111,13 +112,14 @@ void Analyse::QualitePointMoment(double longitude, double latitude, int annee, i
 vector<Capteur>  Analyse::capteurDansLaZone(double longitude, double latitude, double rayon){
 	vector<Capteur> listRep;
 	vector<Capteur>::iterator it;
-	cout<<collectionCapteur.size()<<endl;
+	
 		for (it=collectionCapteur.begin();it!=collectionCapteur.end();it++)
 			{
-				cout<<"it"<<endl;
+				
 				if (sqrt( (latitude-atof((it->getLatitude()).c_str()))*(latitude-atof((it->getLatitude()).c_str())) + (longitude-atof((it->getLongitude()).c_str()))*(longitude-atof((it->getLongitude()).c_str())) ) < rayon && it->getDefaillant()!=true)
 				{
 					listRep.push_back(*it);
+					
 				}
 			}
 	return listRep;
@@ -232,6 +234,7 @@ int Analyse::CalculeQualiteAir(double lat, double lon, double rayon, int annee,i
 	  }
 	}*/
 	vector<Capteur> sensorsDansZone=capteurDansLaZone(lon,lat,rayon);
+	
 	float moyPM10=0;
 	float moySO2=0;
 	float moyO3=0;
@@ -242,42 +245,36 @@ int Analyse::CalculeQualiteAir(double lat, double lon, double rayon, int annee,i
 	int totalMesuresNO2=0;
 	vector<Mesure> listMeasure;
 	vector<Capteur>::iterator it;
+	vector<Mesure>::iterator m;
 	for(it=sensorsDansZone.begin();it!=sensorsDansZone.end();it++){
-		for(Mesure m : it->getListeMesure()){
+		for(m=it->getListeMesure().begin();m!=it->getListeMesure().end();m++){          
 	  //si la mesure a ete faite dans la duree predeterminee
-		  if((annee == m.getTime().tm_year)&&(mois == m.getTime().tm_mon+1)&&(jour == m.getTime().tm_mday))
-		  {
-		vector <Capteur>::iterator debut, fin;
-		debut = sensorsDansZone.begin();
-		fin = sensorsDansZone.end();
-		while(debut != fin){
-		  if((debut->getCapteurID()).compare(m.getCapteurID()) == 0){
-			  if(m.getAttribut().getID().compare("PM10") == 0){
-			  totalMesuresPM10++;
-			  moyPM10 = moyPM10 + m.getValue();
-		  }else if(m.getAttribut().getID().compare("SO2") == 0){
-		  totalMesuresSO2++;
-			  moySO2 = moySO2 + m.getValue();
-		  }else if(m.getAttribut().getID().compare("O3") == 0){
-		  totalMesuresO3++;
-			  moyO3 = moyO3 + m.getValue();
-		  }else if(m.getAttribut().getID().compare("NO2") == 0){
-		  totalMesuresNO2++;
-			  moyNO2 = moyNO2 + m.getValue();
-		  }
-		break;
-	  }
-	  debut++;
-	}
-	  }
-	}
+			
+			if((annee == m->getTime().tm_year)&&(mois == m->getTime().tm_mon+1)&&(jour == m->getTime().tm_mday))
+				{
+					  if(m->getAttribut().getID().compare("PM10") == 0){
+							totalMesuresPM10++;
+							moyPM10 = moyPM10 + m->getValue();
+					  }else if(m->getAttribut().getID().compare("SO2") == 0){
+							totalMesuresSO2++;
+							moySO2 = moySO2 + m->getValue();
+					  }else if(m->getAttribut().getID().compare("O3") == 0){
+							totalMesuresO3++;
+							moyO3 = moyO3 + m->getValue();
+					  }else if(m->getAttribut().getID().compare("NO2") == 0){
+							totalMesuresNO2++;
+							moyNO2 = moyNO2 + m->getValue();
+					  } 
+				}
+		}
 	}
 	//on calcule les moyennes
 	moyPM10 = moyPM10/totalMesuresPM10;
 	moySO2 = moySO2/totalMesuresSO2;
 	moyO3 = moyO3/totalMesuresO3;
 	moyNO2 = moyNO2/totalMesuresNO2;
-
+	
+	
 
 
 	//Standard ATMO introduit par le prof
