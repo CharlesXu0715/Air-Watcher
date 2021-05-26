@@ -33,6 +33,7 @@ using namespace std;
 //
 //{
 //} //----- Fin de Méthode
+
 /*void AnalyseGouverneur::sensorsSimilairs(string capteurID, int dureeEnMois, float precision){
 
   sensorsSimilaires.clear();

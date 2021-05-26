@@ -50,11 +50,11 @@ int main(int argc,char* argv[]){
 	
 	ifstream fic("./FichiersCSV/attributes.csv");
 	vector<Attribut> listAttribut=LectureFichier::lectureAttribut(fic);
-	ifstream fic2("./FichiersCSV/measurements.csv");
+	ifstream fic2("./FichiersCSV/MeasurementTest2.csv");
 	vector<Mesure> listMesure=LectureFichier::lectureMesure(fic2,listAttribut);
-	ifstream fic3("./FichiersCSV/sensors.csv");
+	ifstream fic3("./FichiersCSV/SensorTest.csv");
 	vector<Capteur> listCapteur=LectureFichier::lectureCapteur(fic3,listMesure);
-	ifstream fic4("./FichiersCSV/cleaners.csv");
+	ifstream fic4("./FichiersCSV/cleanersTest.csv");
 	vector<Cleaner> listCleaner=LectureFichier::lectureCleaner(fic4);
 	ifstream fic5("./FichiersCSV/providers.csv");
 	vector<Fournisseur> listProvider=LectureFichier::lectureFournisseur(fic5,listCleaner);
