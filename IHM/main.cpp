@@ -208,10 +208,15 @@ int main(int argc,char* argv[]){
 						break;
 
 						case 5:
-						util= false;
-						cout<<endl;
-						cout<<endl;
-						select = 0;
+							MenuQualitePointMoment();
+							select = 0;
+						break;
+
+						case 6:
+							util= false;
+							cout<<endl;
+							cout<<endl;
+							select = 0;
 						break;
 
 					}
@@ -258,11 +263,17 @@ int main(int argc,char* argv[]){
 						break;
 
 						case 5:
+							MenuQualitePointMoment();
+							select = 0;
+						break;
+
+						case 6:
 							four= false;
 							cout<<endl;
 							cout<<endl;
 							select = 0;
 						break;
+
 
 					}
 				}
@@ -411,25 +422,36 @@ void MenuMoyZonePeriode(){
 }
 
 void MenuQualitePointMoment(AnalyseGouverneur * ana2){
+	int select;
 	double longitude;
 	double latitude;
 	int annee;
 	int mois;
 	int jour;
 
-	cout<<"nous allons déterminer le point de recherche, entrez la latitude de ce point"<<endl;
-	cin>>latitude;
-	cout<<"nous allons déterminer le point de recherche, entrez la longitude de ce point"<<endl;
-	cin>>longitude;
 	cout<<"Entrez le jour de recherche"<<endl;
 	cin>>jour;
 	cout<<"Entrez le mois de recherche (en chiffre, par exemple pour mars entrez \"03\")"<<endl;
 	cin>>mois;
 	cout<<"Entrez l'année de recherche"<<endl;
 	cin>>annee;
+	cout<<"Souhaitez-vous choisir un calculer a qualité de l'air autour d'un capteur précis ou entrer vos propres coordonnées?"<<endl;
+	cout<<"1 - Choisir un capteur"<<endl;
+	cout<<"2 - Entrer mes propres coordonnées"<<endl;
+	cin>>select;
+	if(select==1){
+		cout<<"Voici la liste des capteurs:"<<endl;
+		//Afficher la liste des capteurs
+	} else {
+		cout<<"nous allons déterminer le point de recherche, entrez la latitude de ce point"<<endl;
+		cin>>latitude;
+		cout<<"nous allons déterminer le point de recherche, entrez la longitude de ce point"<<endl;
+		cin>>longitude;
+		
+	}
 
 	cout<<"la qualité de l'air en "<<to_string(latitude)<<" / "+to_string(longitude)<<" le "<<to_string(jour)<<"/"<<to_string(mois)<<"/"<<to_string(annee)<<" est :"<<endl;
-	ana2->QualitePointMoment(longitude, latitude, annee, mois, jour);
+	ana->QualitePointMoment(longitude, latitude, annee, mois, jour);
 	cout<<endl;
 	cout<<endl;
 }
