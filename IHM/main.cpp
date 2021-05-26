@@ -24,6 +24,7 @@ int MenuStatGouv();
 void MenuMoyZoneMoment();
 void MenuMoyZonePeriode();
 void MenuQualitePointMoment(AnalyseGouverneur *);
+void MenuSimilarite(AnalyseGouverneur *);
 
 int MenuUtilisateur(string);
 void MenuAjouterCapteur();
@@ -139,6 +140,7 @@ int main(int argc,char* argv[]){
 
 						case 4:
 							//méthode Similarité
+							MenuSimilarite(ana);
 							cout<<endl;
 							cout<<endl;
 							select = 0;
@@ -420,6 +422,20 @@ void MenuMoyZonePeriode(){
 	cout<<endl;
 	cout<<endl;
 	//Méthode Moy Zone Periode
+}
+
+void MenuSimilarite(AnalyseGouverneur * ana2){
+	int annee;
+	int mois;
+	string ID;
+
+	cout<<"Entrez le mois de recherche (en chiffre, par exemple pour mars entrez \"03\")"<<endl;
+	cin>>mois;
+	cout<<"Entrez l'année de recherche"<<endl;
+	cin>>annee;
+	cout<<"Entrez le capteurID reférence pour trouver les capteurs similaires"<<endl;
+	cin>>ID;
+	ana2->Similarite(ID,annee,mois);
 }
 
 void MenuQualitePointMoment(AnalyseGouverneur * ana2){
