@@ -108,6 +108,41 @@ void Analyse::QualitePointMoment(double longitude, double latitude, int annee, i
 	}
 
 }
+
+void Analyse::QualitePointMoment(string capteurID, int annee, int mois, int jour){
+	double rayon =2;
+	bool capteurTrouve = false;
+	double longitude;
+	double latitude;
+
+	vector<Capteur>::iterator it;
+	
+	for (it=collectionCapteur.begin();it!=collectionCapteur.end();it++)
+		{
+			if(it->getCapteurID()==capteurID){
+				longitude=stof(it->getLongitude());
+				latitude=stof(it->getLatitude());
+				capteurTrouve=true;
+				break;
+			}
+		}
+	if(capteurTrouve==false){
+		cout<<"CapteurID introuvable ou inexistant, retour au menu"<<endl;
+	} else {
+	
+		vector<Capteur> listCapt(capteurDansLaZone(longitude,latitude,rayon));
+	
+		if(listCapt.empty()==true){
+			cout<<"Aucun Capteur dans la zone reessayer avec d'autres positions"<<endl;
+	
+		}else{
+		
+			CalculeQualiteAir(latitude,longitude,rayon,annee,mois,jour,true);
+		}
+	}
+
+}
+
 void Analyse::AfficherCapteurs(){
 	vector<Capteur>::iterator it;
 	

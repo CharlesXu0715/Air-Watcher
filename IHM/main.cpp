@@ -450,6 +450,7 @@ void MenuQualitePointMoment(AnalyseGouverneur * ana2){
 		cout<<endl;
 		cout<<"Entrez le capteurID que vous souhaitez consulter"<<endl;
 		cin>>ID;
+		ana2->QualitePointMoment(ID, annee, mois, jour);
 	} else {
 		cout<<endl;
 		cout<<endl;
