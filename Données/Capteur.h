@@ -45,10 +45,12 @@ public:
     void setDefaillant(bool unLabel);
     void setCaptureID(string unID);
 //----------------------------------------------------- Constructeurs
+Capteur();
+
 Capteur(string,string,string);
 Capteur();
 
-Capteur ( const Capteur & unTypeMesure );
+Capteur ( const Capteur & unCapteur );
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :

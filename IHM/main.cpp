@@ -62,7 +62,7 @@ int main(int argc,char* argv[]){
 	vector<Fournisseur> listProvider=LectureFichier::lectureFournisseur(fic5,listCleaner);
 	ifstream fic6("./FichiersCSV/users.csv");
 	vector<UtilisateurPrive> listUP=LectureFichier::lectureUtilisateurPrive(fic6,listCapteur);
-	AnalyseGouverneur * ana = new AnalyseGouverneur(listAttribut,listMesure,listCapteur,listCleaner,listProvider,listUP);
+	ana = new AnalyseGouverneur(listAttribut,listMesure,listCapteur,listCleaner,listProvider,listUP);
 	Gouverneur* gouvernement= new Gouverneur("10",ana->getListeCapteur(),ana->getListeCleaner());
 	
 	
@@ -81,8 +81,9 @@ int main(int argc,char* argv[]){
 	bool running=true;
 
 
-
-
+	string capteurID;
+	int annee;
+	int mois;
 	//A partir d'ici, le main est une suite de switch case qui sert a naviguer dans les divers menu du programme.
 
 	while(running){
