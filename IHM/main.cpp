@@ -1,4 +1,5 @@
 
+
 //Import de librairies
 #include <string>
 #include "../Données/Capteur.h"
@@ -23,6 +24,7 @@ int MenuStatGouv();
 void MenuMoyZoneMoment();
 void MenuMoyZonePeriode();
 void MenuQualitePointMoment(AnalyseGouverneur *);
+void MenuSimilarite(AnalyseGouverneur *);
 
 int MenuUtilisateur(string);
 void MenuAjouterCapteur();
@@ -139,15 +141,7 @@ int main(int argc,char* argv[]){
 
 						case 4:
 							//méthode Similarité
-							
-							cout<<"CapteurID:"<<endl;
-							cin>>capteurID;
-							cout<<"Annee:"<<endl;
-							
-							cin>>annee;
-							cout<<"Mois:"<<endl;
-							cin>>mois;
-							ana->sensorsSimilairs(capteurID,annee,mois);
+							MenuSimilarite(ana);
 							cout<<endl;
 							cout<<endl;
 							select = 0;
@@ -218,10 +212,15 @@ int main(int argc,char* argv[]){
 						break;
 
 						case 5:
-						util= false;
-						cout<<endl;
-						cout<<endl;
-						select = 0;
+							MenuQualitePointMoment(ana);
+							select = 0;
+						break;
+
+						case 6:
+							util= false;
+							cout<<endl;
+							cout<<endl;
+							select = 0;
 						break;
 
 					}
@@ -268,11 +267,17 @@ int main(int argc,char* argv[]){
 						break;
 
 						case 5:
+							MenuQualitePointMoment(ana);
+							select = 0;
+						break;
+
+						case 6:
 							four= false;
 							cout<<endl;
 							cout<<endl;
 							select = 0;
 						break;
+
 
 					}
 				}
@@ -420,26 +425,63 @@ void MenuMoyZonePeriode(){
 	//Méthode Moy Zone Periode
 }
 
+void MenuSimilarite(AnalyseGouverneur * ana2){
+	int annee;
+	int mois;
+	string ID;
+
+	cout<<"Entrez le mois de recherche (en chiffre, par exemple pour mars entrez \"03\")"<<endl;
+	cin>>mois;
+	cout<<"Entrez l'année de recherche"<<endl;
+	cin>>annee;
+	cout<<"Entrez le capteurID reférence pour trouver les capteurs similaires"<<endl;
+	cin>>ID;
+	ana2->Similarite(ID,annee,mois);
+}
+
 void MenuQualitePointMoment(AnalyseGouverneur * ana2){
+	int select;
 	double longitude;
 	double latitude;
 	int annee;
 	int mois;
 	int jour;
 
-	cout<<"nous allons déterminer le point de recherche, entrez la latitude de ce point"<<endl;
-	cin>>latitude;
-	cout<<"nous allons déterminer le point de recherche, entrez la longitude de ce point"<<endl;
-	cin>>longitude;
 	cout<<"Entrez le jour de recherche"<<endl;
 	cin>>jour;
 	cout<<"Entrez le mois de recherche (en chiffre, par exemple pour mars entrez \"03\")"<<endl;
 	cin>>mois;
 	cout<<"Entrez l'année de recherche"<<endl;
 	cin>>annee;
+	cout<<endl;
+	cout<<endl;
+	cout<<"Souhaitez-vous calculer la qualité de l'air autour d'un capteur précis ou entrer vos propres coordonnées?"<<endl;
+	cout<<"1 - Choisir un capteur"<<endl;
+	cout<<"2 - Entrer mes propres coordonnées"<<endl;
+	cin>>select;
+	if(select==1){
+		string ID;
+		cout<<"Voici la liste des capteurs:"<<endl;
+		//Afficher la liste des capteurs
+		ana2->AfficherCapteurs();
+		cout<<endl;
+		cout<<"Entrez le capteurID que vous souhaitez consulter"<<endl;
+		cin>>ID;
+		ana2->QualitePointMoment(ID, annee, mois, jour);
+	} else {
+		cout<<endl;
+		cout<<endl;
+		cout<<"nous allons déterminer le point de recherche, entrez la latitude de ce point"<<endl;
+		cin>>latitude;
+		cout<<"nous allons déterminer le point de recherche, entrez la longitude de ce point"<<endl;
+		cin>>longitude;
+		cout<<"la qualité de l'air en "<<to_string(latitude)<<" / "+to_string(longitude)<<" le "<<to_string(jour)<<"/"<<to_string(mois)<<"/"<<to_string(annee)<<" est :"<<endl;
+		ana2->QualitePointMoment(longitude, latitude, annee, mois, jour);
+		
+	}
 
-	cout<<"la qualité de l'air en "<<to_string(latitude)<<" / "+to_string(longitude)<<" le "<<to_string(jour)<<"/"<<to_string(mois)<<"/"<<to_string(annee)<<" est :"<<endl;
-	ana2->QualitePointMoment(longitude, latitude, annee, mois, jour);
+	//cout<<"la qualité de l'air en "<<to_string(latitude)<<" / "+to_string(longitude)<<" le "<<to_string(jour)<<"/"<<to_string(mois)<<"/"<<to_string(annee)<<" est :"<<endl;
+	//ana2->QualitePointMoment(longitude, latitude, annee, mois, jour);
 	cout<<endl;
 	cout<<endl;
 }
@@ -452,7 +494,8 @@ int MenuUtilisateur(string ID){
 		cout<<"2 - Mettre à jour les données de mon capteur"<<endl;
 		cout<<"3 - Supprimer un de mes capteurs"<<endl;
 		cout<<"4 - Consulter mes points"<<endl;
-		cout<<"5 - Retour"<<endl;
+		cout<<"5 - Mesurer la qualité de l'air en un point"<<endl;
+		cout<<"6 - Retour"<<endl;
 		cin>>select;
 		cout<<endl;
 		cout<<endl;
@@ -493,7 +536,8 @@ int MenuFournisseur(string ID){
 		cout<<"2 - Supprimer un de mes Air'Cleaners"<<endl;
 		cout<<"3 - Entrer la date de fin de fonctionnement d'un de mes Air'Cleaners"<<endl;
 		cout<<"4 - Calculer la qualité de l'air autour d'un de mes Air'Cleaners"<<endl;
-		cout<<"5 - Retour"<<endl;
+		cout<<"5 - Mesurer la qualité de l'air en un point"<<endl;
+		cout<<"6 - Retour"<<endl;
 		cin>>select;
 		cout<<endl;
 		cout<<endl;
