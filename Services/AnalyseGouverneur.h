@@ -50,7 +50,8 @@ AnalyseGouverneur(vector<Attribut> listAttribut,vector<Mesure> listMesure,vector
 
 //----------------------------------------------------- Méthodes publiques
  
-void sensorsSimilairs(string lat, string lon, float rayonEnKm, int dureeEnMois, float precision);
+void sensorsSimilairs(string capteurID, int annee, int mois);
+int CalculeQualiteAir(Capteur unCapteur, int annee, int mois);
 
 //------------------------------------------------------------------ PRIVE
 

@@ -76,12 +76,20 @@ void Capteur::setDefaillant(bool unLabel) {
 //------------------------------------------------- Surcharge d'opérateurs
 
 //-------------------------------------------- Constructeurs - destructeur
+Capteur::Capteur()
+{
+	capteurID="";
+   latitude="";
+   longitude="";
+   defaillant=false;
+}
+
 Capteur::Capteur ( const Capteur & unCapteur )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de copie de <Analyse>" << endl;
+    cout << "Appel au constructeur de copie de <Capteur>" << endl;
 #endif
 
 	capteurID=unCapteur.capteurID;
@@ -97,7 +105,7 @@ Capteur::Capteur (string a,string b,string c)
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de <Analyse>" << endl;
+    cout << "Appel au constructeur de <Capteur>" << endl;
 #endif
 
    capteurID=a;
