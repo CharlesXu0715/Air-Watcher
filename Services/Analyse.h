@@ -40,7 +40,7 @@ public:
    
 //----------------------------------------------------- Constructeurs
 Analyse(vector<Attribut> listAttribut,vector<Mesure> listMesure,vector<Capteur> listCapteur,vector<Cleaner> listCleaner,vector<Fournisseur> listProvider,vector<UtilisateurPrive> listUP);
-
+void AfficherCapteurs();
 
 Analyse ( const Analyse & unAnalyse );
     // Mode d'emploi (constructeur de copie) :

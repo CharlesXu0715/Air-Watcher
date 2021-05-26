@@ -108,6 +108,14 @@ void Analyse::QualitePointMoment(double longitude, double latitude, int annee, i
 	}
 
 }
+void Analyse::AfficherCapteurs(){
+	vector<Capteur>::iterator it;
+	
+		for (it=collectionCapteur.begin();it!=collectionCapteur.end();it++)
+			{
+				cout<<it->getCapteurID()<<" ; Latitude: "<<it->getLatitude()<<" ; Longitude: "<<it->getLongitude()<<endl;
+			}
+}
 
 vector<Capteur>  Analyse::capteurDansLaZone(double longitude, double latitude, double rayon){
 	vector<Capteur> listRep;
