@@ -57,6 +57,7 @@ void AnalyseGouverneur::sensorsSimilairs(string capteurID, int annee, int mois){
 		if (it->getCapteurID()==capteurID)
 		{
 			c=*it;
+			break;
 		}
 	}
 	int q=CalculeQualiteAir(c,annee,mois);
