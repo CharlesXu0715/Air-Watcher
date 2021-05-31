@@ -36,19 +36,7 @@ using namespace std;
 
 void AnalyseGouverneur::sensorsSimilairs(string capteurID, int annee, int mois){
 
-  //sensorsSimilaires.clear();
-  //const float earthRadiusInKm = 6371;
- 
-/*
-  //obtenir temps actuel
-	time_t rawtime;
-	struct tm * now;
-	time (&rawtime);
-	now = localtime (&rawtime); //right now in tm
-
-	//obtenir nombre de mois et nombre d'annees de mesure
-	int nbAnnees = (int)dureeEnMois/12+1;
-	int nbMois = dureeEnMois%12;*/
+  
 
 	vector<Capteur>::iterator it;
 	Capteur c;
@@ -57,6 +45,7 @@ void AnalyseGouverneur::sensorsSimilairs(string capteurID, int annee, int mois){
 		if (it->getCapteurID()==capteurID)
 		{
 			c=*it;
+			break;
 		}
 	}
 	int q=CalculeQualiteAir(c,annee,mois);
@@ -68,7 +57,7 @@ void AnalyseGouverneur::sensorsSimilairs(string capteurID, int annee, int mois){
 	double a,b;
 	int n=0;
 	int d=0;
-	//cout<<collectionCapteur.size()<<endl;
+	
 	while (n<=9&&n<collectionCapteur.size()-1)
 	{
 		for (it=collectionCapteur.begin();it!=collectionCapteur.end();it++)
@@ -81,13 +70,13 @@ void AnalyseGouverneur::sensorsSimilairs(string capteurID, int annee, int mois){
 				b=abs(lon-atof((it->getLongitude()).c_str()));
 				distance[n]=sin(a/2)*sin(a/2)*sin(b/2)*sin(b/2)*cos(lat)*cos(atof((it->getLatitude()).c_str()));
 				n++;
-				//cout<<n<<endl;
+				
 			}
 			if (n==10) break;
 		}
 		d++;
 	}
-	//cout<<"bon"<<endl;
+	
 	for (int i=0;i<9;i++)
 	{
 		for (int j=i+1;j<=9;j++)
@@ -106,69 +95,12 @@ void AnalyseGouverneur::sensorsSimilairs(string capteurID, int annee, int mois){
 	{
 		cout<<i+1<<". ID:"<<listCapteur[i].getCapteurID()<<"  Lat:"<<listCapteur[i].getLatitude()<<"  Lon:"<<listCapteur[i].getLongitude()<<"  Qualite:"<<qualite[i]<<endl;
 	}
-/*  //obtenir rayon de mesure
-  float radiusDegrees = rtod(rayonEnKm/earthRadiusInKm); //demi-taille de l'intervalle de lat/lon en degres
-  float latitude = stof(lat);//string to float
-  float longitude = stof(lon);*/
-  //map<Sensor, pair<float, unsigned int>, sensCompare> meanBySensor; //map des sensors avec leur moyenne de valeur et le nombre de valeurs ajoutees
-                                                       //(pour diviser apres), je profite de la boucle qui parcours deja les sensors
-  /*for(Capteur s : collectionCapteur)
-  {
-    //si sensor dans la bonne zone
-    if((stof(s.getLatitude())<(latitude+radiusDegrees) && stof(s.getLatitude())>(latitude-radiusDegrees)) && (stof(s.getLongitude())<(longitude+radiusDegrees) && stof(s.getLongitude())>(longitude-radiusDegrees)))
-    {
-      pair<float, unsigned int> p = make_pair((float)0.0, (unsigned int)0);
-      meanBySensor.insert({s, p});
-    }
-    
-  }
-  float mean=0;
-  int totalMesures=0;
-  for(Measure m : collectionMesure)
-  {
-    if((now->tm_year-nbAnnees <= m.getTime().tm_year)&&(now->tm_mon-nbMois <= m.getTime().tm_mon)) //si la mesure a ete faite dans la duree predeterminee
-    {
-      ++totalMesures;
-      mean+=m.getValue(); //ajouter sa valeur a la moyenne
-      map<Sensor, pair<float, unsigned int>>::iterator it;
-      for(it=meanBySensor.begin(); it!=meanBySensor.end(); ++it)
-      {
-        if(it->first.getID() == m.getSensorID()){
-          it->second.first+=m.getValue();//on ajoute sa valeur a la moyenne du sensor
-          ++it->second.second;//on incremente le nombre de mesures de ce sensor
-        }
-      }
-    }
-  }
-  mean=mean/totalMesures;
-  map<Sensor, pair<float, unsigned int>>::iterator it;
-  for(it=meanBySensor.begin(); it!=meanBySensor.end(); ++it)
-  {
-    it->second.first/=it->second.second;
-    if(it->second.first<mean*(1.0+precision) && it->second.first>mean*(1.0-precision))
-    {
-      sensorsSimilaires.push_back(it->first);
-    }
-  }*/
+
  return;
 }
 int AnalyseGouverneur::CalculeQualiteAir(Capteur unCapteur, int annee,int mois){
 	annee = annee - 1900;
-	/*const float earthRadiusInKm = 6371.0;
-	const float rayonEnKm = 150.0;
-	float radiusDegrees = rtod(rayonEnKm/earthRadiusInKm); //on calcule l'intervalle de coordonnees a considérer
-	float latitude = stof(lat);
-	float longitude = stof(lon);
-
-	list <string> sensorsDansZone; //liste des sensors qui sont dans la zone choisie, seulement leurs ID sont dans la liste
-	for(Sensor s : listSensor)
-	{
-	  //si sensor dans la bonne zone
-	  if((stof(s.getLatitude())<(latitude+radiusDegrees) && stof(s.getLatitude())>(latitude-radiusDegrees)) && (stof(s.getLongitude())<(longitude+radiusDegrees) && stof(s.getLongitude())>(longitude-radiusDegrees)))
-	  {
-		sensorsDansZone.push_back(s.getID());
-	  }
-	}*/
+	
 	double lon=atof(unCapteur.getLongitude().c_str());
 	double lat=atof(unCapteur.getLatitude().c_str());
 	vector<Capteur> sensorsDansZone=capteurDansLaZone(lon,lat,0.001);

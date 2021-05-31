@@ -40,7 +40,7 @@ public:
    
 //----------------------------------------------------- Constructeurs
 Analyse(vector<Attribut> listAttribut,vector<Mesure> listMesure,vector<Capteur> listCapteur,vector<Cleaner> listCleaner,vector<Fournisseur> listProvider,vector<UtilisateurPrive> listUP);
-void AfficherCapteurs();
+
 
 Analyse ( const Analyse & unAnalyse );
     // Mode d'emploi (constructeur de copie) :
@@ -66,6 +66,8 @@ void QualitePointMoment(double longitude, double latitude, int annee, int mois, 
 void QualitePointMoment(string capteurID, int annee, int mois, int jour);
 vector<Capteur>  capteurDansLaZone(double longitude, double latitude, double rayon);
 int CalculeQualiteAir(double lat, double lon, double rayon, int annee, int mois, int jour, bool affichage);
+void AfficherCapteurs();
+void afficherCapteur(vector<Capteur> list);
 
 
 //------------------------------------------------------------------ PRIVE

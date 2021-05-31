@@ -18,6 +18,7 @@
 #include <math.h> 
 #include<cstring>
 #include <math.h>
+#include <time.h>
 using namespace std;
 
 
@@ -96,15 +97,37 @@ vector<UtilisateurPrive> & Analyse::getListeUtilisateurPrive(){
 
 void Analyse::QualitePointMoment(double longitude, double latitude, int annee, int mois, int jour){
 	double rayon =2;
-	
+	clock_t debut,fin;
+	debut=clock();
 	vector<Capteur> listCapt(capteurDansLaZone(longitude,latitude,rayon));
+	fin=clock();
+	float duree=((double) (fin-debut))/CLOCKS_PER_SEC;
+	
+	cout<<endl;
+	cout<<"******* Test unitaire de la sous méthode capteurDansLaZone ********"<<endl;
+	cout<<endl;
+	cout<<"Cette sous methode a pris "<<duree<<" secondes"<<endl;
+	cout<<endl;
+	cout<<"Liste des capteurs présents à la position mentionné avec un rayon de 2"<<endl;
+	cout<<endl;
+	afficherCapteur(listCapt);
+	cout<<endl;
+	
 	
 	if(listCapt.empty()==true){
 		cout<<"Aucun Capteur dans la zone reessayer avec d'autres positions"<<endl;
 	
 	}else{
-		
+		clock_t debut2,fin2;
+		debut2=clock();
 		CalculeQualiteAir(latitude,longitude,rayon,annee,mois,jour,true);
+		fin2=clock();
+		float duree2=((double) (fin2-debut2))/CLOCKS_PER_SEC;
+		cout<<endl;
+		cout<<"La sous methode CalculerQualiteAir a pris "<<duree2<<" secondes"<<endl;
+		cout<<endl;
+		
+		
 	}
 
 }
@@ -129,15 +152,34 @@ void Analyse::QualitePointMoment(string capteurID, int annee, int mois, int jour
 	if(capteurTrouve==false){
 		cout<<"CapteurID introuvable ou inexistant, retour au menu"<<endl;
 	} else {
-	
+		clock_t debut,fin;
+		debut=clock();
 		vector<Capteur> listCapt(capteurDansLaZone(longitude,latitude,rayon));
+		fin=clock();
+		float duree=((double) (fin-debut))/CLOCKS_PER_SEC;
+		cout<<endl;
+		cout<<"******* Test unitaire de la sous méthode capteurDansLaZone ********"<<endl;
+		cout<<endl;
+		cout<<"Cette sous methode a pris "<<duree<<" secondes"<<endl;
+		cout<<endl;
+		cout<<"Liste des capteurs présents à la position mentionné avec un rayon de 2"<<endl;
+		cout<<endl;
+		afficherCapteur(listCapt);
+		cout<<endl;
 	
 		if(listCapt.empty()==true){
 			cout<<"Aucun Capteur dans la zone reessayer avec d'autres positions"<<endl;
 	
 		}else{
-		
+			clock_t debut2,fin2;
+			debut2=clock();
 			CalculeQualiteAir(latitude,longitude,rayon,annee,mois,jour,true);
+			fin2=clock();
+			float duree2=((double) (fin2-debut2))/CLOCKS_PER_SEC;
+			cout<<endl;
+			cout<<"La sous methode CalculerQualiteAir a pris "<<duree2<<" secondes"<<endl;
+			cout<<endl;
+			
 		}
 	}
 
@@ -166,6 +208,16 @@ vector<Capteur>  Analyse::capteurDansLaZone(double longitude, double latitude, d
 				}
 			}
 	return listRep;
+}
+
+void Analyse::afficherCapteur(vector<Capteur> list){
+	vector<Capteur>::iterator it;
+	
+		for (it=list.begin();it!=list.end();it++)
+			{
+				cout<<it->getCapteurID()<<" ; Latitude: "<<it->getLatitude()<<" ; Longitude: "<<it->getLongitude()<<endl;
+			}
+	
 }
 
 /*double Analyse::CalculeQualiteAir(vector<Capteur> listCapt,string date){

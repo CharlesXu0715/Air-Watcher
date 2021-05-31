@@ -13,6 +13,7 @@
 #include "../Données/Gouverneur.h"
 #include <iostream>
 #include <iostream>
+#include <time.h>
 using namespace std;
 #include <fstream>
 
@@ -23,7 +24,7 @@ int MenuGouv();
 int MenuStatGouv();
 void MenuMoyZoneMoment();
 void MenuMoyZonePeriode();
-void MenuQualitePointMoment(AnalyseGouverneur *);
+void MenuQualitePointMoment(AnalyseGouverneur *, clock_t qualitePointMomentDebut,clock_t qualitePointMomentFin);
 void MenuSimilarite(AnalyseGouverneur *);
 
 int MenuUtilisateur(string);
@@ -46,10 +47,14 @@ AnalyseGouverneur * ana;
 
 int main(int argc,char* argv[]){
 	
+	clock_t lectureFichierDebut,lectureFichierFin;
+	clock_t qualitePointMomentDebut,qualitePointMomentFin;
+	
 	//Phase de lecture et de stockage de toutes les données contenues dans les fichiers .csv		
 	
 	//Variables servant à appeler les fonctions
 	
+	lectureFichierDebut = clock();
 	ifstream fic("./FichiersCSV/attributes.csv");
 	vector<Attribut> listAttribut=LectureFichier::lectureAttribut(fic);
 	ifstream fic2("./FichiersCSV/MeasurementTest2.csv");
@@ -64,8 +69,12 @@ int main(int argc,char* argv[]){
 	vector<UtilisateurPrive> listUP=LectureFichier::lectureUtilisateurPrive(fic6,listCapteur);
 	AnalyseGouverneur * ana = new AnalyseGouverneur(listAttribut,listMesure,listCapteur,listCleaner,listProvider,listUP);
 	Gouverneur* gouvernement= new Gouverneur("10",ana->getListeCapteur(),ana->getListeCleaner());
+	lectureFichierFin=clock();
 	
-	
+	float dureeLectureFichier=((double) (lectureFichierFin-lectureFichierDebut))/CLOCKS_PER_SEC;
+	cout<<endl;
+	cout<<"Les lectures des fichiers ont pris "<<dureeLectureFichier<<" secondes"<<endl;
+	cout<<endl;
 	
 	int select = 0;;
 	
@@ -155,7 +164,7 @@ int main(int argc,char* argv[]){
 
 						case 6:
 							//ana->QualitePointMoment(1.8, 44.0, 2019, 8,11);
-							MenuQualitePointMoment(ana);
+							MenuQualitePointMoment(ana,qualitePointMomentDebut,qualitePointMomentFin);
 							select = 0;
 						break;
 
@@ -211,7 +220,7 @@ int main(int argc,char* argv[]){
 						break;
 
 						case 5:
-							MenuQualitePointMoment(ana);
+							MenuQualitePointMoment(ana,qualitePointMomentDebut,qualitePointMomentFin);
 							select = 0;
 						break;
 
@@ -266,7 +275,7 @@ int main(int argc,char* argv[]){
 						break;
 
 						case 5:
-							MenuQualitePointMoment(ana);
+							MenuQualitePointMoment(ana,qualitePointMomentDebut,qualitePointMomentFin);
 							select = 0;
 						break;
 
@@ -321,7 +330,7 @@ int MenuPrincipal(){
 		cout<<"1 - Gouvernement"<<endl;
 		cout<<"2 - Utilisateur privé"<<endl;
 		cout<<"3 - Fournisseur"<<endl;
-		cout<<"4 - Quiter"<<endl;
+		cout<<"4 - Quitter"<<endl;
 		cin>>select;
 		cout<<endl;
 		cout<<endl;	
@@ -436,10 +445,16 @@ void MenuSimilarite(AnalyseGouverneur * ana2){
 	ana2->AfficherCapteurs();
 	cout<<"Entrez le capteurID reférence pour trouver les capteurs similaires"<<endl;
 	cin>>ID;
+	clock_t debut=clock();
 	ana2->sensorsSimilairs(ID,annee,mois);
+	clock_t fin = clock();
+	float duree=((double) (fin-debut))/CLOCKS_PER_SEC;
+	cout<<endl;
+	cout<<"La fonctionnalité Similarité a pris "<<duree<<" secondes au total"<<endl;
+	cout<<endl;
 }
 
-void MenuQualitePointMoment(AnalyseGouverneur * ana2){
+void MenuQualitePointMoment(AnalyseGouverneur * ana2, clock_t qualitePointMomentDebut,clock_t qualitePointMomentFin){
 	int select;
 	double longitude;
 	double latitude;
@@ -467,7 +482,13 @@ void MenuQualitePointMoment(AnalyseGouverneur * ana2){
 		cout<<endl;
 		cout<<"Entrez le capteurID que vous souhaitez consulter"<<endl;
 		cin>>ID;
+		qualitePointMomentDebut=clock();
 		ana2->QualitePointMoment(ID, annee, mois, jour);
+		qualitePointMomentFin=clock();
+		float duree=((double) (qualitePointMomentFin-qualitePointMomentDebut))/CLOCKS_PER_SEC;
+		cout<<endl;
+		cout<<"La fonctionnalite QualitePointMoment a pris "<<duree<<" secondes au total"<<endl;
+		cout<<endl;
 	} else {
 		cout<<endl;
 		cout<<endl;
@@ -476,7 +497,14 @@ void MenuQualitePointMoment(AnalyseGouverneur * ana2){
 		cout<<"nous allons déterminer le point de recherche, entrez la longitude de ce point"<<endl;
 		cin>>longitude;
 		cout<<"la qualité de l'air en "<<to_string(latitude)<<" / "+to_string(longitude)<<" le "<<to_string(jour)<<"/"<<to_string(mois)<<"/"<<to_string(annee)<<" est :"<<endl;
+		qualitePointMomentDebut=clock();
 		ana2->QualitePointMoment(longitude, latitude, annee, mois, jour);
+		qualitePointMomentFin=clock();
+		
+		float duree=((double) (qualitePointMomentFin-qualitePointMomentDebut))/CLOCKS_PER_SEC;
+		cout<<endl;
+		cout<<"La fonctionnalite QualitePointMoment a pris "<<duree<<" secondes au total"<<endl;
+		cout<<endl;
 		
 	}
 
@@ -488,7 +516,7 @@ void MenuQualitePointMoment(AnalyseGouverneur * ana2){
 
 int MenuUtilisateur(string ID){
 	int select = 0;
-	while(select<1||select>5){
+	while(select<1||select>6){
 		cout<<"Bienvenue "<<ID<<"Que voulez-vous faire? Entrez le numéro correspondant et appuyez sur Entrée."<<endl;
 		cout<<"1 - Fournir mon capteur privé"<<endl;
 		cout<<"2 - Mettre à jour les données de mon capteur"<<endl;
@@ -530,7 +558,7 @@ void MenuSupprimerCapteur(){
 
 int MenuFournisseur(string ID){
 	int select = 0;
-	while(select<1||select>5){
+	while(select<1||select>6){
 		cout<<"Bienvenue "<<ID<<" Que voulez-vous faire? Entrez le numéro correspondant et appuyez sur Entrée."<<endl;
 		cout<<"1 - Fournir mon Air'Cleaner privé"<<endl;
 		cout<<"2 - Supprimer un de mes Air'Cleaners"<<endl;
